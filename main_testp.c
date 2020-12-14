@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 13:54:24 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/13 13:56:56 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/13 19:20:47 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,13 @@ int main(void)
 	printf("\n\n--------TEST 1---------");
 	printf("\n[%p]", ptr);
 	ft_printf("[%p]", ptr);
+	printf("\n\n--------TEST 2---------");
+	printf("\n[%25p]", ptr);
+	ft_printf("[%25p]", ptr);
+	printf("\n\n--------TEST 3---------");
+	printf("\n[%-25p]", ptr);
+	ft_printf("[%-25p]", ptr);
+	printf("\n\n--------TEST 4---------");
+	printf("\n[%-*p]", 20, ptr);
+	ft_printf("[%-*p]", 20, ptr);
 }

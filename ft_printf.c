@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:35:41 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/13 16:42:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/14 00:43:17 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int ft_is_flag(char c)
 	flags = "*0+ -#";
 	while (flags[i] != c)
 		i++;
-	if (i > 4)
+	if (i > 5)
 		return (0);
 	return (1);
 }
@@ -92,30 +92,24 @@ int	ft_printf(const char *str, ...)
 			if (format->width == 0)
 				format->width = va_arg(va, int);
 			if (str[i + j] && ft_is_conv_spec(str[i + j]) == 1)
-			{		 
+			{	
 				if (str[i + j] == 'c')
-				{
-					c = va_arg (va, unsigned);
-					ft_putchar(c);
-				}
+					ft_putchar(c = va_arg (va, int));
 				else if (ft_is_charset("feg", str[i + j]))
-				{
-					f = va_arg(va, double);
-					ft_putfloat(f, format);
-				}
+					ft_putfloat(f = va_arg(va, double), format);
 				else if (str[i + j] == 'p')
-					p = va_arg(va, void*);
+					ft_putnbr_hex((long long)(p = va_arg(va, void*)), format);
 				else if (str[i + j] == 's')
-				{
-					p = va_arg(va, char *);
-					ft_putstr(p);
-				}
+					ft_putstr(p = va_arg(va, char *));
 				else if (ft_is_charset("udixX", str[i + j]))
 				{
 					if (str[i + j] == '*')
 						format->width = va_arg(va, int);
-					k = va_arg(va, int);		
-					ft_put_nbr(k, format, ft_count_charsize(k));
+					k = va_arg(va, long long);
+					if (ft_is_charset("xX", str[i + j]))
+						ft_putnbr_hex((unsigned int)k, format);
+					else
+						ft_put_nbr((int)k, format, ft_count_charsize(k));
 				}
 			}
 		}

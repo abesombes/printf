@@ -6,11 +6,16 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/13 13:36:19 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/14 23:09:22 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+
+long long ft_max(long long a, long long b)
+{
+	return ((a > b ? a : b));
+}
 
 void	ft_print_before(int length, int minus_pos, char c)
 {
@@ -40,7 +45,22 @@ void	ft_print_after(int length, char c)
 
 void	ft_print_formating_before(long long n, t_printf *format, int n_size)
 {
-	if (format->precision >= 0 && format->width > n_size)
+	if (format->precision > n_size && format->width > format->precision)
+	{
+		if (!format->minus)
+			ft_print_before(format->width - format->precision - (format->plus ? 1: 0), 0, ' ');
+		if (format->plus && n > 0)
+			write(1, "+", 1);
+		ft_print_before(format->precision - n_size + (n < 0 ? 1 : 0), (n < 0 ? -1 : 0), '0');
+	}
+	else if (format->precision > n_size && format->width <= format->precision)
+	{
+		if (format->plus && n > 0)
+			ft_print_before(format->precision - n_size, -2, '0');
+		else
+			ft_print_before(format->precision - n_size + (n < 0 ? 1 : 0), (n < 0 ? -1 : 0), '0');
+	}
+	else if (format->precision >= 0 && format->width > n_size)
 		ft_print_before(format->width - n_size, (n < 0 ? 1 : 0), ' ');
 	else if (format->width > n_size && format->plus && format->minus && n > 0)
 		write(1, "+", 1);
@@ -72,7 +92,7 @@ void	ft_put_nbr(long long n, t_printf *format, int n_size)
 	c = (nb % 10) + 48;
 	write(1, &c, 1);
 	if (format->width > n_size && format->minus && !format->plus)
-			ft_print_after(format->width - n_size, ' ');	
+			ft_print_after(format->width - ft_max(n_size, format->precision), ' ');	
 	else if (format->width > n_size && format->minus && format->plus)
-			ft_print_after(format->width - n_size - (n < 0 ? 0 : 1), ' ');	
+			ft_print_after(format->width - ft_max(n_size, format->precision) - (n < 0 ? 0 : 1), ' ');	
 }
