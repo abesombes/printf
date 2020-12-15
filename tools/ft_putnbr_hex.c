@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 13:58:43 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/14 09:41:49 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/15 01:30:59 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,15 @@ void ft_putnbr_hex(long long i, t_printf *format)
 	n_size = (format->conv_spec == 'p' ? 2 : 1);
 	while ((j /= 15) > 15)
 		n_size++;
+	if (format->alternate && format->width > n_size && format->zero && format->precision < 0)
+	{
+		write(1, (upper_case_x ? "0X" : "0x"), 2);
+		n_size++;
+	}
 	ft_print_formating_before(i, format, n_size);
-	if (format->conv_spec == 'p' && upper_case_x)
+	if (format->conv_spec == 'p' && upper_case_x && ((format->space && !format->zero) || format->precision >= 0 || format->alternate))
 		write(1, "0X", 2);
-	else if (format->conv_spec == 'p')
+	else if (format->conv_spec == 'p' && ((format->space && !format->zero) || format->precision >= 0 || format->alternate))
 		write(1, "0x", 2);
 	if (upper_case_x)
 		ft_put_nbr_hexa_uc(i);
