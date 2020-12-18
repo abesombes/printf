@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/09 13:27:10 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/17 19:44:56 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_printf
 	t_bool	space;
 	t_bool	alternate;
 	t_bool	zero;
+	t_bool	uc_x;
 	t_bool	dot;
 }				t_printf;
 

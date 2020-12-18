@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:35:41 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/15 01:10:05 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/17 21:00:24 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	ft_printf(const char *str, ...)
 				else if (ft_is_charset("feg", str[i + j]))
 					ft_putfloat(f = va_arg(va, double), format);
 				else if (str[i + j] == 'p')
-					ft_putnbr_hex((long long)(p = va_arg(va, void*)), format);
+					ft_putnbr_hex((long long)(p = va_arg(va, void*)), format, ft_count_hexsize(k, format));
 				else if (str[i + j] == 's')
 					ft_putstr(p = va_arg(va, char *));
 				else if (ft_is_charset("udixX", str[i + j]))
@@ -106,10 +106,10 @@ int	ft_printf(const char *str, ...)
 					if (str[i + j] == '*')
 						format->width = va_arg(va, int);
 					k = va_arg(va, long long);
-					if (ft_is_charset("xX", str[i + j]))
-						ft_putnbr_hex((unsigned int)k, format);
+				if (ft_is_charset("xX", str[i + j]))
+						ft_putnbr_hex((unsigned int)k, format, ft_count_hexsize(k, format));
 					else
-						ft_put_nbr((int)k, format, ft_count_charsize(k));
+						ft_put_nbr((int)k, format, ft_count_charsize(k, format));
 				}
 			}
 		}
@@ -134,6 +134,7 @@ void ft_reset(t_printf *format)
 	format->space = 0;
 	format->alternate = 0;
 	format->zero = 0;
+	format->uc_x = 0;
 	format->dot = 0;
 }
 
@@ -183,29 +184,3 @@ int	ft_parse_format(const char *str, t_printf *format, int i, va_list *va)
 //	printf("alternate: [%i]\n", format->alternate);
 	return(1);
 }
-
-//int main(void)
-//{
-	//	ft_printf("test POURCENTAGE: %%\nvaleur de la 1ere variable: %i\nvaleur de la 2eme variable: %d\nvaleur de la 3eme variable: %c\n", 4, 8, 'z');
-	//printf("your name: %%-10s, age: %%05d, height: %%0+10.3fm");
-	//printf("\nyour name: %-s", "Alexandre");
-	//printf("FLOAT NUMBER TEST 14.123456: %f", 14.12345650000); 
-	//ft_printf("your name: %-10s, age: %05d, height: %0+10.3fm", "Foo bar", 21, 1.84556449);
-	//printf("your name: %-10s, age: %05d, height: %fm", "Foo bar", 21, 1.84556449);
-//	ft_printf("your name: %-10s, age: %05d, height: %0+10.4fm", "Foo bar", 21, 1.8455645);
-	//printf("%%05.1d");
-//	ft_printf("[%05d]", -21);
-//	printf(" vs [%05d]", -21);
-//	ft_printf("[%-5d]", 21);
-//	printf(" vs [%-5d]", 21);
-//	printf("[%.1d]", -21);
-//	printf("[%0.1d]", -21);
-//	printf("[%04.1d]", -21);
-//	printf("[%08.1d]", -21);
-	//printf("\n[%05.d]", -21);
-	//printf("\n[%05d]", -21);
-	//printf("\n[%5d]", -21);
-	//printf("\n[% 5d]", -21);
-	//printf("%08x\n", 1024);
-	//printf("your name: %-10s, age: %05d, height: %fm", "Foo bar", 21, 1.8455645);
-//}

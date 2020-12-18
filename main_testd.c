@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 09:55:52 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/15 14:21:37 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/16 22:11:14 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,27 @@ int main(void)
 	printf("\n\n--------TEST 2: %%5d---------");
 	printf("\n[%5d]", d);
 	ft_printf("[%5d]", d);
+	printf("\n\n--------TEST 2 bis: d = 1234567890 et %%5d---------");
+	printf("\n[%5d]", 1234567890);
+	ft_printf("[%5d]", 1234567890);
+	printf("\n\n--------TEST 2 ter: d = 1234567890 et %%5.6d---------");
+	printf("\n[%5.6d]", 1234567890);
+	ft_printf("[%5.6d]", 1234567890);
 	printf("\n\n--------TEST 3: %%-5d---------");
 	printf("\n[%-5d]", d);
 	ft_printf("[%-5d]", d);
 	printf("\n\n--------TEST 4: %%05d---------");
 	printf("\n[%05d]", d);
 	ft_printf("[%05d]", d);
+	printf("\n\n--------TEST 4 bis: %%-05d---------");
+	printf("\n[%-05d]", d);
+	ft_printf("[%-05d]", d);
 	printf("\n\n--------TEST 5: %%+5d---------");
 	printf("\n[%+5d]", d);
 	ft_printf("[%+5d]", d);
+	printf("\n\n--------TEST 5 bis: %%+2d---------");
+	printf("\n[%+2d]", d);
+	ft_printf("[%+2d]", d);
 	printf("\n\n--------TEST 6: %%+05d---------");
 	printf("\n[%+05d]", d);
 	ft_printf("[%+05d]", d);
@@ -60,6 +72,9 @@ int main(void)
 	printf("\n\n--------TEST 14: %%010.6d---------");
 	printf("\n[%010.6d]", d);
 	ft_printf("[%010.6d]", d);
+	printf("\n\n--------TEST 14 bis: %%010d---------");
+	printf("\n[%010d]", d);
+	ft_printf("[%010d]", d);
 	printf("\n\n--------TEST 15: %%+10.6d---------");
 	printf("\n[%+10.6d]", d);
 	ft_printf("[%+10.6d]", d);
@@ -69,6 +84,12 @@ int main(void)
 	printf("\n\n--------TEST 17: %%+-10.6d---------");
 	printf("\n[%+-10.6d]", d);
 	ft_printf("[%+-10.6d]", d);
+	printf("\n\n--------TEST 17 bis: %% +-10.6d---------");
+	printf("\n[% +-10.6d]", d);
+	ft_printf("[% +-10.6d]", d);
+	printf("\n\n--------TEST 17 bis bis: %% -10.6d---------");
+	printf("\n[% -10.6d]", d);
+	ft_printf("[% -10.6d]", d);
 	printf("\n\n--------TEST 18: %%+.6d---------");
 	printf("\n[%+.6d]", d);
 	ft_printf("[%+.6d]", d);
