@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:35:41 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/17 21:00:24 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/22 19:11:34 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,35 @@ int	ft_printf(const char *str, ...)
 				if (str[i + j] == 'c')
 					ft_putchar(c = va_arg (va, int));
 				else if (ft_is_charset("feg", str[i + j]))
-					ft_putfloat(f = va_arg(va, double), format);
+				{
+					f = va_arg(va, double);
+					ft_put_float(f, format, ft_count_floatsize(f, format));
+				}
 				else if (str[i + j] == 'p')
-					ft_putnbr_hex((long long)(p = va_arg(va, void*)), format, ft_count_hexsize(k, format));
+				{
+					p = va_arg(va, void *);
+					ft_putnbr_hex((long long)p, format, ft_count_hexsize((long long)p, format));
+				}
 				else if (str[i + j] == 's')
-					ft_putstr(p = va_arg(va, char *));
+				{
+					p = va_arg(va, char *);
+					ft_put_str(p, format, ft_count_letters(p, format));
+				}
 				else if (ft_is_charset("udixX", str[i + j]))
 				{
 					if (str[i + j] == '*')
 						format->width = va_arg(va, int);
 					k = va_arg(va, long long);
-				if (ft_is_charset("xX", str[i + j]))
+					if (ft_is_charset("xX", str[i + j]))
 						ft_putnbr_hex((unsigned int)k, format, ft_count_hexsize(k, format));
 					else
+					{
+						if (str[i + j] == 'u' && format->plus)
+							format->plus = 0;
+						if (str[i + j] == 'u' && format->space)
+							format->space = 0;
 						ft_put_nbr((int)k, format, ft_count_charsize(k, format));
+					}
 				}
 			}
 		}
