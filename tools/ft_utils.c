@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:45:17 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/20 17:07:34 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/24 15:14:52 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int ft_count_padding_left_spaces(long long nb, t_printf *format)
 		n_digits = ft_count_floatsize(nb, format);
 	else
 		n_digits = ft_count_digits(nb);
-	if (f.minus || (f.zero && f.precision < 0))
+	if (f.minus || (f.zero && f.precision < 0) || (f.conv_spec == 'f' && f.zero && f.width > f.precision && !f.minus))
 		return (0);
 	pls = ft_max(f.precision, n_digits);
 	if (f.conv_spec == 'p' || (ft_is_charset("xX", f.conv_spec) && f.alternate))

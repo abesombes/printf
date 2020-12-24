@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 10:30:49 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/20 20:02:38 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/24 15:40:00 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 long long ft_ten_power(int nb)
 {
 	long long res;
+	int i;
 
+	i = 0;
 	res = 1;
-	while (nb-- > 0)
+	while (i++ < nb)
 		res *= 10;
 	return (res);
 }
@@ -45,7 +47,7 @@ int	ft_count_floatsize(double n, t_printf *f)
 	if (f->precision < 0)
 		return ((f_size += ft_count_digits(int_part) + 7));
 	f_size += ft_count_digits(int_part) + ft_count_digits(dec_part) + 1;
-	while (dec_part < ft_ten_power(i--))
+	while (dec_part <= ft_ten_power(--i) && i > 0)
 		f_size++;
 	return (f_size);
 }

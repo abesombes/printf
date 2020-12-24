@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 17:10:39 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/20 20:02:05 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/24 16:02:39 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,17 @@ void	ft_zeros_after_dot(double n, long long dec_part, t_printf *f)
 		def_pr = 6;
 	else
 		def_pr = f->precision;
-	while (dec_part < ft_ten_power(def_pr--))
+	while (dec_part < ft_ten_power(def_pr--) && def_pr > 0)
 		write(1, "0", 1);
+}
+
+long long ft_float_rounding(long long dec_part, long long int_part, int def_pr, double n)
+{
+	if (dec_part % 10 > 4)
+		dec_part = (long long)((n - int_part) * ft_ten_power(def_pr)) + 1;
+	else
+		dec_part = (long long)((n - int_part) * ft_ten_power(def_pr));
+	return (dec_part);
 }
 
 void	ft_putfloat(double n, t_printf *f)
@@ -65,18 +74,17 @@ void	ft_putfloat(double n, t_printf *f)
 	ft_prefix(n, f);
 	checkz = f->width - ft_count_floatsize(n, f) - ft_max(
 	ft_count_padding_left_spaces(n, f), ft_count_padding_left_zeros(n, f));
+	printf("ft_count_floatsize: %i - checkz: %lli", ft_count_floatsize(n, f), checkz);
 	if (f->precision >= 0)
 	   def_pr = f->precision;	
+	printf(" - def_pr: %i - ", def_pr);
 	if (checkz > 0 && !f->minus)
 		ft_print_char(checkz, '0');
 	int_part = (long long)nb;
 	dec_part = (long long)((n - int_part) * ft_ten_power(def_pr + 1));
 	printf("dec_part: %lli", dec_part);
 	checkz = dec_part;
-	if (dec_part % 10 > 4)
-		dec_part = (long long)((n - int_part) * ft_ten_power(def_pr)) + 1;
-	else
-		dec_part = (long long)((n - int_part) * ft_ten_power(def_pr));
+	dec_part = ft_float_rounding(dec_part, int_part, def_pr, n);
 	ft_putnbr(int_part);
 	if (f->precision)
 		ft_putchar('.');
