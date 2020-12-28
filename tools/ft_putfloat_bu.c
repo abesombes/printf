@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 17:10:39 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/27 21:34:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/24 16:02:39 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_put_float(double n, t_printf *f, int n_size)
 
 	pls = ft_count_padding_left_spaces(n, f);
 	plz = ft_count_padding_left_zeros(n, f);
+	printf("pls: %i - plz: %i", pls, plz);
 	if (!f->minus && f->width > n_size && pls > 0)
 		ft_print_char(pls, ' ');
 	else if (!f->minus && f->width > n_size && plz > 0 && !(f->zero &&
@@ -39,32 +40,24 @@ void	ft_prefix(double n, t_printf *f)
 		write(1, "-", 1);
 }
 
-void	ft_zeros_after_dot(double n, t_printf *f)
+void	ft_zeros_after_dot(double n, long long dec_part, t_printf *f)
 {
 	int def_pr;
-	int i;
 
 	if (f->precision < 0)
 		def_pr = 6;
 	else
 		def_pr = f->precision;
-	i = 1;
-	while ((long long)(n * ft_ten_power(i)) % ft_ten_power(i) == 0 && i <= def_pr)
-	{
-		if ((long long)(n * ft_ten_power(i + 1)) % ft_ten_power(i + 1) >= 9)
-			return ;
-		else 
-			write(1, "0", 1);
-		i++;
-	}
+	while (dec_part < ft_ten_power(def_pr--) && def_pr > 0)
+		write(1, "0", 1);
 }
 
 long long ft_float_rounding(long long dec_part, long long int_part, int def_pr, double n)
 {
 	if (dec_part % 10 > 4)
-		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr)) + 1;
+		dec_part = (long long)((n - int_part) * ft_ten_power(def_pr)) + 1;
 	else
-		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr));
+		dec_part = (long long)((n - int_part) * ft_ten_power(def_pr));
 	return (dec_part);
 }
 
@@ -81,17 +74,20 @@ void	ft_putfloat(double n, t_printf *f)
 	ft_prefix(n, f);
 	checkz = f->width - ft_count_floatsize(n, f) - ft_max(
 	ft_count_padding_left_spaces(n, f), ft_count_padding_left_zeros(n, f));
+	printf("ft_count_floatsize: %i - checkz: %lli", ft_count_floatsize(n, f), checkz);
 	if (f->precision >= 0)
 	   def_pr = f->precision;	
+	printf(" - def_pr: %i - ", def_pr);
 	if (checkz > 0 && !f->minus)
 		ft_print_char(checkz, '0');
 	int_part = (long long)nb;
-	dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr + 1));
+	dec_part = (long long)((n - int_part) * ft_ten_power(def_pr + 1));
+	printf("dec_part: %lli", dec_part);
+	checkz = dec_part;
 	dec_part = ft_float_rounding(dec_part, int_part, def_pr, n);
 	ft_putnbr(int_part);
-	if (f->precision || (!f->precision && f->alternate))
+	if (f->precision)
 		ft_putchar('.');
-	ft_zeros_after_dot(n, f);
-	if (ft_max(dec_part, -dec_part) > 0)
-		ft_putnbr(ft_max(dec_part, -dec_part));
+	ft_zeros_after_dot(n, checkz, f);
+	ft_putnbr(ft_max(dec_part, -dec_part));
 }

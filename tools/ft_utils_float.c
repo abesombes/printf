@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 10:30:49 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/24 15:40:00 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/26 22:08:21 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ long long ft_ten_power(int nb)
 	while (i++ < nb)
 		res *= 10;
 	return (res);
+}
+
+double ft_abs(double nb)
+{
+	if (nb >= 0)
+		return (nb);
+	return (-nb);
 }
 
 int	ft_count_floatsize(double n, t_printf *f)
@@ -40,13 +47,17 @@ int	ft_count_floatsize(double n, t_printf *f)
 		i = f->precision;
 	dec_part = (long long)((n - int_part) * ft_ten_power(i + 1));
 	if (dec_part % 10 > 4)
-		dec_part = (long long)((n - int_part) * ft_ten_power(i)) + 1;
+		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(i)) + 1;
 	else
-		dec_part = (long long)((n - int_part) * ft_ten_power(i));
+		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(i));
 	dec_part = ft_max(dec_part, -dec_part);
 	if (f->precision < 0)
-		return ((f_size += ft_count_digits(int_part) + 7));
-	f_size += ft_count_digits(int_part) + ft_count_digits(dec_part) + 1;
+		return ((f_size += ft_count_digits(int_part) + 7));	
+	f_size += ft_count_digits(int_part);
+	if (f->precision > 0)
+		return (f_size += f->precision + 1); 
+    f_size += (dec_part > 0 ? ft_count_digits(dec_part) + 1 : 0);
+	f_size += (dec_part == 0 && f->alternate ? 1 : 0);
 	while (dec_part <= ft_ten_power(--i) && i > 0)
 		f_size++;
 	return (f_size);

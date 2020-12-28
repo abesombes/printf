@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:35:41 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/22 19:11:34 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/27 13:16:20 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ int	ft_printf(const char *str, ...)
 				else if (ft_is_charset("feg", str[i + j]))
 				{
 					f = va_arg(va, double);
-					ft_put_float(f, format, ft_count_floatsize(f, format));
+					if (str[i + j] == 'f')
+						ft_put_float(f, format, ft_count_floatsize(f, format));
+					else
+						ft_put_exp(f, format, ft_count_expsize(f, format));
 				}
 				else if (str[i + j] == 'p')
 				{
@@ -134,6 +137,7 @@ int	ft_printf(const char *str, ...)
 	}
 	ft_putchar(str[i]);
 	va_end (va);
+	free(format);
 	return (nb_var);
 }
 
