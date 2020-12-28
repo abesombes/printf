@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:38:00 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/27 23:01:50 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/28 15:13:16 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # include "libft/libft.h"
 # include "elem.h"
 
+int ft_parse_format(const char *str, t_printf *format, int i, va_list *va);
+int ft_is_charset(char *s, char c);
+int ft_is_flag(char c);
+int ft_is_conv_spec(char c);
+void ft_reset(t_printf *format);
 void    ft_zeros_after_dot_exp(double n, long long dec_part, t_printf *f);
 int	ft_count_expsize(double n, t_printf *f);
 long long ft_float_rounding(long long dec_part, long long int_part, int def_pr, double n);
@@ -46,7 +51,6 @@ int ft_count_padding_left_zeros(double nb, t_printf *format);
 int ft_count_padding_left_spaces(double nb, t_printf *format);
 int ft_count_padding_right_spaces(double nb, t_printf *format);
 void    ft_print_padding_right(long long n, t_printf *format, int n_size);
-int ft_is_charset(char *s, char c);
 void ft_put_nbr_hexa_lc(long long i);
 void ft_put_nbr_hexa_uc(long long i);
 int ft_count_hexsize(long long nb, t_printf *f);

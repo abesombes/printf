@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elem.h                                             :+:      :+:    :+:   */
+/*   ft_put_addr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/28 19:06:10 by abesombe         ###   ########.fr       */
+/*   Created: 2020/12/13 13:58:43 by abesombe          #+#    #+#             */
+/*   Updated: 2020/12/13 14:07:33 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ELEM_H
-# define ELEM_H
-# include <stdarg.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
+#include "ft_printf.h"
 
-typedef int		t_bool;
-typedef struct	s_printf
+ft_put_addr(void *ptr, t_print 
 {
-	char	conv_spec;
-	char	length;
-	int		displayed;
-	int		width;
-	int		precision;
-	t_bool	minus;
-	t_bool	plus;
-	t_bool	space;
-	int		alternate;
-	t_bool	zero;
-	t_bool	uc_x;
-}				t_printf;
-
-#endif
+	
+}

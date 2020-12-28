@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elem.h                                             :+:      :+:    :+:   */
+/*   ft_putstrn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/28 19:06:10 by abesombe         ###   ########.fr       */
+/*   Created: 2020/12/22 19:05:19 by abesombe          #+#    #+#             */
+/*   Updated: 2020/12/22 21:49:48 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ELEM_H
-# define ELEM_H
-# include <stdarg.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
+#include "../ft_printf.h"
 
-typedef int		t_bool;
-typedef struct	s_printf
+void	ft_putstrn(char *str, int n)
 {
-	char	conv_spec;
-	char	length;
-	int		displayed;
-	int		width;
-	int		precision;
-	t_bool	minus;
-	t_bool	plus;
-	t_bool	space;
-	int		alternate;
-	t_bool	zero;
-	t_bool	uc_x;
-}				t_printf;
+	int i;
 
-#endif
+	i = 0;
+	while (*str && i++ < n)
+		write(1, str++, 1);
+}

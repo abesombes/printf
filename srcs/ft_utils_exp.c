@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elem.h                                             :+:      :+:    :+:   */
+/*   ft_utils_exp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/28 19:06:10 by abesombe         ###   ########.fr       */
+/*   Created: 2020/12/27 13:17:17 by abesombe          #+#    #+#             */
+/*   Updated: 2020/12/27 14:16:46 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ELEM_H
-# define ELEM_H
-# include <stdarg.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
+#include "../ft_printf.h"
 
-typedef int		t_bool;
-typedef struct	s_printf
+int	ft_count_expsize(double n, t_printf *f)
 {
-	char	conv_spec;
-	char	length;
-	int		displayed;
-	int		width;
-	int		precision;
-	t_bool	minus;
-	t_bool	plus;
-	t_bool	space;
-	int		alternate;
-	t_bool	zero;
-	t_bool	uc_x;
-}				t_printf;
+	double	nb;
+	int f_size;
 
-#endif
+	nb = (n < 0 ? -n : n);
+	f_size = (n < 0 || f->space || f->plus ? 1 : 0);	
+	if (f->precision < 0)
+		return ((f_size + 1 + 1 + 6 + 4));	
+	if (f->precision >= 0)
+		return (f_size + 1 + 1 + f->precision + 4); 
+	return (f_size);
+}

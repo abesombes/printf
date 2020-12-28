@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elem.h                                             :+:      :+:    :+:   */
+/*   ft_utils_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/28 19:06:10 by abesombe         ###   ########.fr       */
+/*   Created: 2020/12/22 17:23:43 by abesombe          #+#    #+#             */
+/*   Updated: 2020/12/22 21:28:18 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ELEM_H
-# define ELEM_H
-# include <stdarg.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
+#include "../ft_printf.h"
 
-typedef int		t_bool;
-typedef struct	s_printf
+int ft_count_letters(char *str, t_printf *f)
 {
-	char	conv_spec;
-	char	length;
-	int		displayed;
-	int		width;
-	int		precision;
-	t_bool	minus;
-	t_bool	plus;
-	t_bool	space;
-	int		alternate;
-	t_bool	zero;
-	t_bool	uc_x;
-}				t_printf;
+	int n_letters;
 
-#endif
+	n_letters = 0;
+	if (f->precision >= 0)
+		n_letters = f->precision;
+	else
+		while (str[n_letters])
+			n_letters++;
+	return (n_letters);
+}
