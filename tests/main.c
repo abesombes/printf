@@ -6,11 +6,12 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 11:10:48 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/07 14:27:25 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/29 15:39:15 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "../ft_printf.h"
 
 int main(void)
 {
@@ -23,7 +24,10 @@ int main(void)
 	nb = 12;
 	precision = 4;
 	ptr = &nb;
+	printf("test multi flags %%p: [%#10.8jmp] - nb = [% +18d] - fl = [%24.15f]\n", ptr, nb, fl);
+	ft_printf("test multi flags %%p: [%#10.8jmp] - nb = [% +18d] - fl = [%24.15f]\n", ptr, nb, fl);
     printf("test flag %%8.4f sur [23.45]: f1 = [%8.4f]\ntest flag %%10.2E sur [3141.5926]: f2 = [%10.2E]\ntest flag %%#08x sur [0x1db]: x = [%#08x]\ntest flag %%d: i = [%d]\n", 23.45, 3141.5926, 0x1db, -1 );
+    ft_printf("test flag %%8.4f sur [23.45]: f1 = [%8.4f]\ntest flag %%10.2E sur [3141.5926]: f2 = [%10.2E]\ntest flag %%#08x sur [0x1db]: x = [%#08x]\ntest flag %%d: i = [%d]\n", 23.45, 3141.5926, 0x1db, -1 );
 	printf("test flag %%p: [%p]\n", ptr);
 	printf("test flag %%f: [%f]\n", fl);
 	printf("test flag %%d: [%d]\n", nb);

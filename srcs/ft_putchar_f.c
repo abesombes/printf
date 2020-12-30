@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elem.h                                             :+:      :+:    :+:   */
+/*   ft_putchar_f.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 13:49:03 by abesombe         ###   ########.fr       */
+/*   Created: 2020/12/30 00:31:06 by abesombe          #+#    #+#             */
+/*   Updated: 2020/12/30 00:33:47 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ELEM_H
-# define ELEM_H
-# include <stdarg.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
+#include "../ft_printf.h"
 
-typedef int		t_bool;
-typedef struct s_printf
+void ft_putchar_f(unsigned char c, t_printf *f)
 {
-	char	conv_spec;
-	char	length;
-	int		displayed;
-	int		width;
-	int		precision;
-	t_bool	minus;
-	t_bool	plus;
-	t_bool	space;
-	int		alternate;
-	t_bool	zero;
-	t_bool	uc_x;
-}				t_printf;
-
-#endif
+	write(1, &c, 1);
+	f->displayed++;
+}

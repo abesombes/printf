@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 22:23:33 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/22 21:41:13 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 12:31:18 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void ft_put_str(char *s, t_printf *f, int s_size)
 {
-	printf("f->width: %i - s_size: %i", f->width, s_size);
 	if (!f->minus && f->width > s_size && !f->zero)
-		ft_print_char(f->width - s_size, ' ');
+		ft_print_char(f->width - s_size, ' ', f);
 	else if (!f->minus && f->width > s_size && f->zero)
-		ft_print_char(f->width - s_size, '0');
+		ft_print_char(f->width - s_size, '0', f);
 	if (f->precision >= 0)
 		ft_putstrn(s, f->precision);
 	else
-		ft_putstr(s);
+		ft_putstr_f(s, f);
 	if (f->width > s_size && f->minus)
-		ft_print_char(f->width - s_size, ' ');
+		ft_print_char(f->width - s_size, ' ', f);
 }

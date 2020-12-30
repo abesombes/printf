@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_addr.c                                      :+:      :+:    :+:   */
+/*   ft_putstr_f.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/13 13:58:43 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/13 14:07:33 by abesombe         ###   ########.fr       */
+/*   Created: 2020/12/30 11:50:37 by abesombe          #+#    #+#             */
+/*   Updated: 2020/12/30 11:55:45 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
-ft_put_addr(void *ptr, t_print 
+void	ft_putstr_f(char *str, t_printf *f)
 {
-	
+	while (*str)
+	{
+		write(1, str++, 1);
+		f->displayed++;
+	}
 }

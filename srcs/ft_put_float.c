@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putfloat.c                                      :+:      :+:    :+:   */
+/*   ft_put_float.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 17:10:39 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/27 21:34:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 12:27:50 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,59 @@
 
 void	ft_put_float(double n, t_printf *f, int n_size)
 {
-	int pls;
-	int plz;
+	int	pls;
+	int	plz;
 
-	pls = ft_count_padding_left_spaces(n, f);
-	plz = ft_count_padding_left_zeros(n, f);
+	pls = ft_count_pad_lspaces(n, f);
+	plz = ft_count_pad_lzeros(n, f);
 	if (!f->minus && f->width > n_size && pls > 0)
-		ft_print_char(pls, ' ');
-	else if (!f->minus && f->width > n_size && plz > 0 && !(f->zero &&
-				f->alternate))
-		ft_print_char(plz, '0');
+		ft_print_char(pls, ' ', f);
+	else if (!f->minus && f->width > n_size && plz > 0 && !(f->zero && \
+f->alternate))
+		ft_print_char(plz, '0', f);
 	ft_putfloat(n, f);
 	if (f->width > n_size && f->minus)
-		ft_print_padding_right(n, f, n_size);
+		ft_print_pad_right(n, f, n_size);
 }
 
 void	ft_prefix(double n, t_printf *f)
 {
 	if (f->plus && n >= 0)
-		write(1, "+", 1);
+		ft_putchar_f('+', f);
 	else if (f->space && n >= 0)
-		write(1, " ", 1);
+		ft_putchar_f(' ', f);
 	else if (n < 0)
-		write(1, "-", 1);
+		ft_putchar_f('-', f);
 }
 
 void	ft_zeros_after_dot(double n, t_printf *f)
 {
-	int def_pr;
-	int i;
+	int	def_pr;
+	int	i;
 
 	if (f->precision < 0)
 		def_pr = 6;
 	else
 		def_pr = f->precision;
 	i = 1;
-	while ((long long)(n * ft_ten_power(i)) % ft_ten_power(i) == 0 && i <= def_pr)
+	while ((long long)(n * ft_ten_power(i)) % ft_ten_power(i) == 0 && \
+i <= def_pr)
 	{
 		if ((long long)(n * ft_ten_power(i + 1)) % ft_ten_power(i + 1) >= 9)
 			return ;
-		else 
-			write(1, "0", 1);
+		else
+			ft_putchar_f('0', f);
 		i++;
 	}
 }
 
-long long ft_float_rounding(long long dec_part, long long int_part, int def_pr, double n)
+long long	ft_float_rounding(long long dec_part, long long int_part, int def_pr, \
+double n)
 {
 	if (dec_part % 10 > 4)
-		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr)) + 1;
+		dec_part = (long long)((ft_abs(n) - int_part)*ft_ten_power(def_pr)) + 1;
 	else
-		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr));
+		dec_part = (long long)((ft_abs(n) - int_part)*ft_ten_power(def_pr));
 	return (dec_part);
 }
 
@@ -77,21 +79,21 @@ void	ft_putfloat(double n, t_printf *f)
 	long long	checkz;
 
 	def_pr = 6;
-	nb = (n < 0 ? -n : n);
+	nb = ft_abs(n);
 	ft_prefix(n, f);
-	checkz = f->width - ft_count_floatsize(n, f) - ft_max(
-	ft_count_padding_left_spaces(n, f), ft_count_padding_left_zeros(n, f));
+	checkz = f->width - ft_count_floatsize(n, f) - ft_max(\
+ft_count_pad_lspaces(n, f), ft_count_pad_lzeros(n, f));
 	if (f->precision >= 0)
-	   def_pr = f->precision;	
+		def_pr = f->precision;
 	if (checkz > 0 && !f->minus)
-		ft_print_char(checkz, '0');
+		ft_print_char(checkz, '0', f);
 	int_part = (long long)nb;
-	dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr + 1));
+	dec_part = (long long)((ft_abs(n) - int_part)*ft_ten_power(def_pr + 1));
 	dec_part = ft_float_rounding(dec_part, int_part, def_pr, n);
 	ft_putnbr(int_part);
 	if (f->precision || (!f->precision && f->alternate))
-		ft_putchar('.');
+		ft_putchar_f('.', f);
 	ft_zeros_after_dot(n, f);
-	if (ft_max(dec_part, -dec_part) > 0)
-		ft_putnbr(ft_max(dec_part, -dec_part));
+	if (ft_abs(dec_part) > 0)
+		ft_putnbr(ft_abs(dec_part));
 }

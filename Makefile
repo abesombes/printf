@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/28 11:49:11 by abesombe          #+#    #+#              #
-#    Updated: 2020/12/28 15:05:11 by abesombe         ###   ########.fr        #
+#    Updated: 2020/12/30 11:56:38 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,19 +17,21 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC_DIR =	srcs
 SRC =		$(SRC_DIR)/ft_printf.c \
-			$(SRC_DIR)/ft_put_addr.c \
 			$(SRC_DIR)/ft_put_nbr.c \
 			$(SRC_DIR)/ft_put_str.c \
-			$(SRC_DIR)/ft_putexp.c \
-			$(SRC_DIR)/ft_putfloat.c \
-			$(SRC_DIR)/ft_putnbr_hex.c \
+			$(SRC_DIR)/ft_putstr_f.c \
+			$(SRC_DIR)/ft_putchar_f.c \
+			$(SRC_DIR)/ft_put_exp.c \
+			$(SRC_DIR)/ft_put_float.c \
+			$(SRC_DIR)/ft_put_nbr_hex.c \
 			$(SRC_DIR)/ft_putstrn.c \
 			$(SRC_DIR)/ft_utils.c \
 			$(SRC_DIC)/ft_utils_exp.c \
 			$(SRC_DIR)/ft_utils_float.c \
 			$(SRC_DIR)/ft_utils_hex.c \
 			$(SRC_DIR)/ft_utils_str.c \
-			$(SRC_DIR)/ft_utils_parsing.c
+			$(SRC_DIR)/ft_utils_parsing.c \
+			$(SRC_DIR)/ft_utils_parsing_2.c
 OBJ_DIR =	objs
 OBJ =		$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
