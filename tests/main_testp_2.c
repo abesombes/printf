@@ -6,12 +6,12 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 21:37:50 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/20 00:27:48 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 23:19:27 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int main(void)
 {

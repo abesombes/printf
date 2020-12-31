@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:45:17 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/27 23:46:24 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 14:08:47 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int ft_count_charsize(long long nb, t_printf *format)
 	return (size);
 }
 
-int ft_count_padding_left_zeros(double nb, t_printf *format)
+int ft_count_pad_lzeros(double nb, t_printf *format)
 {
 	int plz;
 	t_printf f;
@@ -71,7 +71,7 @@ int ft_count_padding_left_zeros(double nb, t_printf *format)
 	return (f.width - plz);
 } 
 
-int ft_count_padding_left_spaces(double nb, t_printf *format)
+int ft_count_pad_lspaces(double nb, t_printf *format)
 {
 	int pls;
 	t_printf f;
@@ -99,7 +99,7 @@ int ft_count_padding_left_spaces(double nb, t_printf *format)
 	return (f.width - pls);
 }
 
-int ft_count_padding_right_spaces(double nb, t_printf *format)
+int ft_count_pad_rspaces(double nb, t_printf *format)
 {
 	int prs;
 	int extra;

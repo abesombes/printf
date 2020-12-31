@@ -6,12 +6,12 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 09:55:52 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/27 15:15:44 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/31 00:14:52 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int main(void)
 {
@@ -22,8 +22,8 @@ int main(void)
 	printf("\n[%f]\n", f);
 	ft_printf("[%f]", f);
 	printf("\n\n--------TEST 2: [%%15f]---------");
-	printf("\n[%15f]\n", f);
-	ft_printf("[%15f]", f);
+	printf("\n  [%15f]\n", f);
+	ft_printf("  [%15f]", f);
 	printf("\n\n--------TEST 3: [%%-15f]---------");
 	printf("\n[%-15f]\n", f);
 	ft_printf("[%-15f]", f);

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/09 17:10:39 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 12:27:50 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 15:05:13 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ f->alternate))
 		ft_print_char(plz, '0', f);
 	ft_putfloat(n, f);
 	if (f->width > n_size && f->minus)
-		ft_print_pad_right(n, f, n_size);
+		ft_print_pad_right(f, n_size);
 }
 
 void	ft_prefix(double n, t_printf *f)
@@ -90,10 +90,10 @@ ft_count_pad_lspaces(n, f), ft_count_pad_lzeros(n, f));
 	int_part = (long long)nb;
 	dec_part = (long long)((ft_abs(n) - int_part)*ft_ten_power(def_pr + 1));
 	dec_part = ft_float_rounding(dec_part, int_part, def_pr, n);
-	ft_putnbr(int_part);
+	ft_putnbr_f(int_part, f);
 	if (f->precision || (!f->precision && f->alternate))
 		ft_putchar_f('.', f);
 	ft_zeros_after_dot(n, f);
 	if (ft_abs(dec_part) > 0)
-		ft_putnbr(ft_abs(dec_part));
+		ft_putnbr_f(ft_abs(dec_part), f);
 }

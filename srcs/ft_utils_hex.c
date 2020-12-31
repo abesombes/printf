@@ -6,24 +6,24 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 17:50:20 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/19 17:13:21 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 14:25:18 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void ft_put_nbr_hexa_lc(long long i)
+void ft_put_nbr_hexa_lc(long long i, t_printf *f)
 {
 	if (i > 15)
-		ft_put_nbr_hexa_lc(i / 16);
-	ft_putchar("0123456789abcdef"[(int)(i % 16)]);
+		ft_put_nbr_hexa_lc(i / 16, f);
+	ft_putchar_f("0123456789abcdef"[(int)(i % 16)], f);
 }
 
-void ft_put_nbr_hexa_uc(long long i)
+void ft_put_nbr_hexa_uc(long long i, t_printf *f)
 {
 	if (i > 15)
-		ft_put_nbr_hexa_uc(i / 16);
-	ft_putchar("0123456789ABCDEF"[(int)(i % 16)]);
+		ft_put_nbr_hexa_uc(i / 16, f);
+	ft_putchar_f("0123456789ABCDEF"[(int)(i % 16)], f);
 }
 
 int ft_count_hexsize(long long nb, t_printf *f)

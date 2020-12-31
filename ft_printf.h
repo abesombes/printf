@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:38:00 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 12:21:00 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 17:06:24 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@
 # include <stdarg.h>
 # include <stdio.h>
 # include <unistd.h>
-# include "libft/libft.h"
 # include "elem.h"
 
+int			ft_strlen(const char *s);
+void    	ft_putnbr_f(long long n, t_printf *f);
 void		ft_putchar_f(unsigned char c, t_printf *f);
 void		ft_putstr_f(char *str, t_printf *f);
-long long	ft_exp_rounding(long long dec_part, int def_pr);
+long long	ft_exp_rounding(long long dec_part);
 void		ft_print_int_dec(double n, double nb, int def_pr, t_printf *f);
 void		ft_calc_exp(double *nb, int *exp);
 int			ft_count_dec_size(long long *dec_part);
-void		ft_print_if_not_percentage(const char *str, int *i);
+void		ft_print_if_not_percentage(const char *str, int *i, t_printf *f);
 void		ft_launch_udix(char conv_spec, t_printf *format, va_list *va);
-void		ft_parse_format(const char *str, t_printf *format, int i, int *j);
+int			ft_parse_format(const char *str, t_printf *format, int i, int *j);
 int			ft_is_charset(char *s, char c);
 int			ft_is_flag(char c);
 int			ft_is_conv_spec(char c);
@@ -39,7 +40,7 @@ long long	ft_float_rounding(long long dec_part, long long int_part, \
 void		ft_zeros_after_dot(double n, t_printf *f);
 void		ft_prefix(double n, t_printf *f);
 void		ft_put_exp_before_after(double n, t_printf *f, int n_size);
-void		ft_print_exp(int exp);
+void		ft_print_exp(int exp, t_printf *f);
 void		ft_putexp(double n, t_printf *f);
 void		ft_put_str(char *s, t_printf *f, int s_size);
 void		ft_putstrn(char *str, int n);
@@ -60,9 +61,9 @@ int			ft_count_digits(long long n);
 int			ft_count_pad_lzeros(double nb, t_printf *format);
 int			ft_count_pad_lspaces(double nb, t_printf *format);
 int			ft_count_pad_rspaces(double nb, t_printf *format);
-void		ft_print_pad_right(long long n, t_printf *format, int n_size);
-void		ft_put_nbr_hexa_lc(long long i);
-void		ft_put_nbr_hexa_uc(long long i);
+void		ft_print_pad_right(t_printf *format, int n_size);
+void		ft_put_nbr_hexa_lc(long long i, t_printf *f);
+void		ft_put_nbr_hexa_uc(long long i, t_printf *f);
 int			ft_count_hexsize(long long nb, t_printf *f);
 int			ft_count_hex_digits(long long n);
 void		ft_print_nbr_block(long long n, t_printf *f, int n_size);

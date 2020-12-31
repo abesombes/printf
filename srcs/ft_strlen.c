@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_f.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/30 00:31:06 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/31 00:10:11 by abesombe         ###   ########.fr       */
+/*   Created: 2020/11/20 10:33:46 by abesombe          #+#    #+#             */
+/*   Updated: 2020/12/30 16:23:47 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	ft_putchar_f(unsigned char c, t_printf *f)
+int	ft_strlen(const char *s)
 {
-	write(1, &c, 1);
-	f->displayed++;
+	int i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 13:17:17 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 00:37:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 14:20:49 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	ft_print_int_dec(double n, double nb, int def_pr, t_printf *f)
 
 	int_part = (long long)nb;
 	dec_part = (long long)((nb - int_part)*ft_ten_power(def_pr + 1));
-	dec_part = ft_exp_rounding(dec_part, def_pr);
-	ft_putnbr(int_part);
+	dec_part = ft_exp_rounding(dec_part);
+	ft_putnbr_f(int_part, f);
 	if (f->precision || (!f->precision && f->alternate))
-		ft_putchar('.');
+		ft_putchar_f('.', f);
 	ft_zeros_after_dot_exp(ft_abs(n), dec_part, f);
 	if (ft_abs(dec_part) > 0)
-		ft_putnbr(ft_abs(dec_part));
+		ft_putnbr_f(ft_abs(dec_part), f);
 }
 
 void	ft_calc_exp(double *nb, int *exp)

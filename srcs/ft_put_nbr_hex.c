@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 13:58:43 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 12:29:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 16:31:00 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ft_print_0x(t_printf *f)
 void	ft_print_hexa_uc_or_lc(long long n, t_printf *f)
 {
 	if (f->uc_x)
-		ft_put_nbr_hexa_uc(n);
+		ft_put_nbr_hexa_uc(n, f);
 	else
-		ft_put_nbr_hexa_lc(n);
+		ft_put_nbr_hexa_lc(n, f);
 }
 
 void	ft_print_hexnbr_block(long long n, t_printf *f, int n_size)
@@ -71,5 +71,5 @@ void ft_putnbr_hex(long long n, t_printf *f, int n_size)
 		f->precision = f->width - 2;
 	ft_print_hexnbr_block(n, f, n_size);
 	if (f->width > n_size && f->minus)
-		ft_print_pad_right(n, f, n_size);
+		ft_print_pad_right(f, n_size);
 }

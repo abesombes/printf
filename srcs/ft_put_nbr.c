@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 12:43:30 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 15:06:04 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_print_nbr_block(long long n, t_printf *f, int n_size)
 {	
 	int			n_digits;
 	long long	nb;
-	char		c;
 
 	if (f->plus && n >= 0)
 		ft_putchar_f('+', f);
@@ -32,7 +31,7 @@ void	ft_print_nbr_block(long long n, t_printf *f, int n_size)
 		ft_print_char(f->width - n_size, '0', f);
 	else if (f->precision < 0 && f->zero && !f->minus && n < 0 && f->width > n_size)
 		ft_print_char(f->width - n_size, '0', f);
-	ft_putnbr(nb);	
+	ft_putnbr_f(nb, f);	
 }
 
 void	ft_print_char(int n, char c, t_printf *f)
@@ -59,7 +58,7 @@ void	ft_print_pad_left(long long n, t_printf *format, int n_size)
 	}
 }
 
-void	ft_print_pad_right(long long n, t_printf *format, int n_size)
+void	ft_print_pad_right(t_printf *format, int n_size)
 {
 	ft_print_char(format->width - n_size, ' ', format);
 }
@@ -79,5 +78,5 @@ void	ft_put_nbr(long long n, t_printf *format, int n_size)
 		ft_print_char(plz, '0', format);
 	ft_print_nbr_block(n, format, n_size);
 	if (f.width > n_size && f.minus)
-		ft_print_pad_right(n, format, n_size);
+		ft_print_pad_right(format, n_size);
 }

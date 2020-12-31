@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 01:02:00 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 13:46:16 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/30 15:02:34 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,29 @@ f->alternate))
 		ft_print_char(plz, '0', f);
 	ft_putexp(n, f);
 	if (f->width > n_size && f->minus)
-		ft_print_pad_right(n, f, n_size);
+		ft_print_pad_right(f, n_size);
 }
 
-void	ft_print_exp(int exp)
+void	ft_print_exp(int exp, t_printf *f)
 {
-	write(1, "e", 1);
+	ft_putchar_f('e', f);
 	if (exp >= 0)
-		write(1, "+", 1);
+		ft_putchar_f('+', f);
 	else
 	{
-		write(1, "-", 1);
+		ft_putchar_f('-', f);
 		exp = -exp;
 	}
 	if (exp < 10)
 	{
-		write(1, "0", 1);
-		ft_putchar(exp + 48);
+		ft_putchar_f('0', f);
+		ft_putchar_f(exp + 48, f);
 	}
 	else
-		ft_putnbr(exp);
+		ft_putnbr_f(exp,f);
 }
 
-long long	ft_exp_rounding(long long dec_part, int def_pr)
+long long	ft_exp_rounding(long long dec_part)
 {
 	if (dec_part % 10 > 4)
 		return ((dec_part / 10) + 1);
@@ -103,6 +103,5 @@ ft_count_pad_lspaces(n, f), ft_count_pad_lzeros(n, f));
 		ft_print_char(checkz, '0', f);
 	ft_calc_exp(&nb, &exp);
 	ft_print_int_dec(n, nb, def_pr, f);
-	ft_print_exp(exp);
-	f->displayed += 4;
+	ft_print_exp(exp, f);
 }
