@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 11:10:48 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/31 16:41:21 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/31 18:22:09 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int main(void)
 {
+	int totalmyptf;
+	int totalrealptf;
 	int nb;
 	float fl;
 	int *ptr;
@@ -24,7 +26,7 @@ int main(void)
 	nb = 12;
 	precision = 4;
 	ptr = &nb;
-	printf("test multi flags %%p: [%10p] - nb = [% 18d] - fl = [%24.15f]\n", ptr, nb, fl);
-	//ft_printf("test multi flags %%p: [%10p] - nb = [% 18d] - fl = [%24.15f]\n", ptr, nb, fl);
-	ft_printf("test multi flags nb = [% 18d]  - %%p: [%10p] - fl = [%24.15f]\n", nb, ptr, fl);
+	totalrealptf=printf("test multi flags %%p: [%10p] - nb = [% 18d] - fl = [%24.15f]\n", ptr, nb, fl);
+	totalmyptf=ft_printf("test multi flags %%p: [%10p] - nb = [% 18d] - fl = [%24.15f]\n", ptr, nb, fl);
+	printf("REALPTF: %i vs TOTALPTF: %i", totalrealptf, totalmyptf);
 }

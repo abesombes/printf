@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/28 11:49:11 by abesombe          #+#    #+#              #
-#    Updated: 2020/12/31 16:59:30 by abesombe         ###   ########.fr        #
+#    Updated: 2020/12/31 18:32:38 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ OBJ_DIR =	objs
 OBJ =		$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 HEAD =		-I.
-CFLAGS =	-Wall -Werror -Wextra -g
+CFLAGS =	-Wall -Werror -Wextra
 LFLAGS =	-L . -lftprintf
 
 CC = gcc

@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 11:35:05 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/31 00:31:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/31 18:44:03 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	ft_print_if_not_percentage(const char *str, int *i, t_printf *f)
 {
 	while (*i < ft_strlen(str) && str[*i] && str[*i] != '%')
-	{
 		ft_putchar_f(str[(*i)++], f);
-	}
 }
 
 void	ft_parse_flags(char flag, t_printf *f)

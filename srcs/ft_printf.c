@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:35:41 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/31 16:41:53 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/31 18:32:02 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,28 +102,20 @@ int	ft_printf(const char *str, ...)
 	format = (t_printf *)malloc(sizeof(t_printf));
 	if (!format)
 		return (-1);
+	format->displayed = 0;
 	while (str[i] && str[i + 1] && i < ft_strlen(str) - 1)
 	{
 		j = 1;
-//		printf("\nline 107 - i = %i\n", i);
 		ft_print_if_not_percentage(str, &i, format);
-//		printf("\nline 109 - i = %i\n", i);
 		if (str[i] && str[i + 1] && str[i] == '%' && str[i + 1] != '%')
 		{
-//			printf("\nline 112 - i = %i\n", i);
 			if (ft_parse_format(str, format, i, &j) == -1)
 				return (-1);
 			ft_parse_width(str[i + j], format, &va);
 		}
 		else if (str[i] && str[i] == '%' && str[i + 1] == '%')
-		{
-//			printf("\nline 120 - i = %i\n", i);
 			ft_putchar_f('%', format);
-		}
 		i = i + j + 1;
-//		printf("\ni: %i\n", i);
 	}
-//	printf("\ni: %i et str size: %i\n", i, ft_strlen(str));
-//	printf("\nline 128 - i = %i\n", i);
 	return (ft_finish_parsing(str[i], &va, format));
 }

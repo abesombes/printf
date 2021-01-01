@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 14:13:12 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 15:09:24 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/31 18:39:58 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	ft_putnbr_f(long long n, t_printf *f)
 	if (n < 0)
 		ft_putchar_f('-', f);
 	if (nb > 9)
-	{
 		ft_putnbr_f(nb / 10, f);
-		f->displayed++;
-	}
 	c = (nb % 10) + 48;
 	ft_putchar_f(c, f);
 }

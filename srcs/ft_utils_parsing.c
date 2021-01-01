@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 12:34:28 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 16:42:30 by abesombe         ###   ########.fr       */
+/*   Updated: 2020/12/31 18:31:14 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void ft_reset(t_printf *format)
 	format->alternate = 0;
 	format->zero = 0;
 	format->uc_x = 0;
-	format->displayed = 0;
 }
 
 int ft_is_conv_spec(char c)
