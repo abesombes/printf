@@ -6,15 +6,15 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 17:23:43 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/22 21:28:18 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/03 00:13:41 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-int ft_count_letters(char *str, t_printf *f)
+int	ft_count_letters(char *str, t_printf *f)
 {
-	int n_letters;
+	int	n_letters;
 
 	n_letters = 0;
 	if (f->precision >= 0)

@@ -6,58 +6,44 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 10:30:49 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/26 22:08:21 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/02 23:33:26 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-long long ft_ten_power(int nb)
+void	ft_increment_fsize(int *f_size, t_printf *f, long long dec_part)
 {
-	long long res;
-	int i;
-
-	i = 0;
-	res = 1;
-	while (i++ < nb)
-		res *= 10;
-	return (res);
-}
-
-double ft_abs(double nb)
-{
-	if (nb >= 0)
-		return (nb);
-	return (-nb);
+	if (dec_part > 0)
+		*f_size += ft_count_digits(dec_part) + 1;
+	if (dec_part == 0 && f->alternate)
+		(*f_size)++;
 }
 
 int	ft_count_floatsize(double n, t_printf *f)
 {
-	double	nb;
-	int		i;
-	int f_size;
-	long long int_part;
-	long long dec_part;
+	double		nb;
+	int			i;
+	int			f_size;
+	long long	int_part;
+	long long	dec_part;
 
 	i = 6;
-	nb = (n < 0 ? -n : n);
-	f_size = (n < 0 || f->space || f->plus ? 1 : 0);	
+	nb = ft_abs(n);
+	f_size = 0;
+	if (n < 0 || f->space || f->plus)
+		f_size = 1;
 	int_part = (long long)nb;
 	if (f->precision >= 0)
 		i = f->precision;
-	dec_part = (long long)((n - int_part) * ft_ten_power(i + 1));
-	if (dec_part % 10 > 4)
-		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(i)) + 1;
-	else
-		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(i));
-	dec_part = ft_max(dec_part, -dec_part);
+	dec_part = (long long)((n - int_part)*ft_ten_power(i + 1));
+	dec_part = ft_abs(ft_float_rounding(dec_part, int_part, i, n));
 	if (f->precision < 0)
-		return ((f_size += ft_count_digits(int_part) + 7));	
+		return ((f_size += ft_count_digits(int_part) + 7));
 	f_size += ft_count_digits(int_part);
 	if (f->precision > 0)
-		return (f_size += f->precision + 1); 
-    f_size += (dec_part > 0 ? ft_count_digits(dec_part) + 1 : 0);
-	f_size += (dec_part == 0 && f->alternate ? 1 : 0);
+		return (f_size += f->precision + 1);
+	ft_increment_fsize(&f_size, f, dec_part);
 	while (dec_part <= ft_ten_power(--i) && i > 0)
 		f_size++;
 	return (f_size);

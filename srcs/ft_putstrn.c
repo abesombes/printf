@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 19:05:19 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/22 21:49:48 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/02 01:02:08 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putstrn(char *str, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (*str && i++ < n)

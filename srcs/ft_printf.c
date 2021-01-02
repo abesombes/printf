@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:35:41 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/31 18:32:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/02 00:49:42 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,16 @@ void	ft_launch_udix(char conv_spec, t_printf *format, va_list *va)
 	}
 }
 
-int	ft_finish_parsing(char c, va_list *va, t_printf *format)
+int	ft_finish_parsing(const char *str, int i, va_list *va, t_printf *format)
 {
-	int	i;
+	int	total_nb_displayed_chars;
 
-	(void)c;
-//	ft_putchar_f(c, format);
+	while (str[i] && i < ft_strlen(str))
+		ft_putchar_f(str[i++], format);
 	va_end(*va);
-	i = format->displayed;
+	total_nb_displayed_chars = format->displayed;
 	free(format);
-	return (i);
+	return (total_nb_displayed_chars);
 }
 
 void	ft_parse_width(char conv_spec, t_printf *format, va_list *va)
@@ -103,19 +103,18 @@ int	ft_printf(const char *str, ...)
 	if (!format)
 		return (-1);
 	format->displayed = 0;
-	while (str[i] && str[i + 1] && i < ft_strlen(str) - 1)
+	while (str[i] && str[i + 1] && i < ft_strlen(str))
 	{
 		j = 1;
 		ft_print_if_not_percentage(str, &i, format);
 		if (str[i] && str[i + 1] && str[i] == '%' && str[i + 1] != '%')
 		{
-			if (ft_parse_format(str, format, i, &j) == -1)
-				return (-1);
+			ft_parse_format(str, format, i, &j);
 			ft_parse_width(str[i + j], format, &va);
 		}
-		else if (str[i] && str[i] == '%' && str[i + 1] == '%')
+		else if (str[i] && str[i + 1] && str[i] == '%' && str[i + 1] == '%')
 			ft_putchar_f('%', format);
 		i = i + j + 1;
 	}
-	return (ft_finish_parsing(str[i], &va, format));
+	return (ft_finish_parsing(str, i, &va, format));
 }

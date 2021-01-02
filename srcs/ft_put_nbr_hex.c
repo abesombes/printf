@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 13:58:43 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 16:31:00 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/02 01:00:14 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_print_hexa_uc_or_lc(long long n, t_printf *f)
 
 void	ft_print_hexnbr_block(long long n, t_printf *f, int n_size)
 {
-	int n_digits;
+	int	n_digits;
 
 	n_digits = ft_count_hex_digits(n);
 	if (f->precision > n_digits)
@@ -50,16 +50,16 @@ f->precision >= 0 || f->alternate))
 	else if (f->conv_spec == 'p')
 		ft_putstr_f("0x", f);
 	if (f->conv_spec == 'p' && f->precision <= n_digits && \
-!ft_count_pad_rspaces(n ,f) && f->width > ft_max(ft_count_pad_lspaces(n, f), \
+!ft_count_pad_rspaces(n, f) && f->width > ft_max(ft_count_pad_lspaces(n, f), \
 ft_count_pad_lzeros(n, f) + n_size))
 		ft_print_char(f->width - n_size, '0', f);
 	ft_print_hexa_uc_or_lc(n, f);
 }
 
-void ft_putnbr_hex(long long n, t_printf *f, int n_size) 
+void	ft_putnbr_hex(long long n, t_printf *f, int n_size)
 {
-	int pls;
-	int plz;
+	int	pls;
+	int	plz;
 
 	pls = ft_count_pad_lspaces(n, f);
 	plz = ft_count_pad_lzeros(n, f);

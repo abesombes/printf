@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/28 11:49:11 by abesombe          #+#    #+#              #
-#    Updated: 2020/12/31 18:32:38 by abesombe         ###   ########.fr        #
+#    Updated: 2021/01/02 19:39:11 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC =		$(SRC_DIR)/ft_printf.c \
 			$(SRC_DIR)/ft_utils_exp.c \
 			$(SRC_DIR)/ft_utils_float.c \
 			$(SRC_DIR)/ft_utils_hex.c \
+			$(SRC_DIR)/ft_utils_maths.c \
 			$(SRC_DIR)/ft_utils_str.c \
 			$(SRC_DIR)/ft_utils_parsing.c \
 			$(SRC_DIR)/ft_utils_parsing_2.c

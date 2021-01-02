@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 11:35:05 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/31 18:44:03 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/03 00:13:10 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,23 @@ void	ft_parse_length(char c1, char c2, t_printf *f)
 		f->length = 'H';
 }
 
-int		ft_return_minus_one_if_error(char c)
+int	ft_return_minus_one_if_error(char c)
 {
 	if (!c)
 		return (-1);
 	return (0);
 }
 
-
-int		ft_parse_format(const char *str, t_printf *format, int i, int *j)
+int	ft_parse_format(const char *str, t_printf *format, int i, int *j)
 {
 	ft_reset(format);
-	while (ft_is_flag(str[i + *j]) && ft_is_charset("cspdiuxXnfge", str[i + *j]) \
-== 0)
+	while (str[i + *j] && ft_is_flag(str[i + *j]) && \
+!ft_is_charset("cspdiuxXnfge", str[i + *j]))
 		ft_parse_flags(str[i + (*j)++], format);
 	if (str[i + *j] && str[i + *j] >= '0' && str[i + *j] <= '9')
 		format->width = 0;
 	while (str[i + *j] && str[i + *j] >= '0' && str[i + *j] <= '9')
-		format->width = format->width * 10 + str[i + (*j)++] - 48;	
+		format->width = format->width * 10 + str[i + (*j)++] - 48;
 	if (!str[i + *j])
 		return (-1);
 	if (str[i + *j] && str[i + *j] == '.')

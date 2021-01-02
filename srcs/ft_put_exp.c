@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 01:02:00 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 15:02:34 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/02 00:56:22 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_print_exp(int exp, t_printf *f)
 		ft_putchar_f(exp + 48, f);
 	}
 	else
-		ft_putnbr_f(exp,f);
+		ft_putnbr_f(exp, f);
 }
 
 long long	ft_exp_rounding(long long dec_part)

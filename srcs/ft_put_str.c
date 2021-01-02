@@ -6,13 +6,13 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 22:23:33 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 12:31:18 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/02 01:00:46 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void ft_put_str(char *s, t_printf *f, int s_size)
+void	ft_put_str(char *s, t_printf *f, int s_size)
 {
 	if (!f->minus && f->width > s_size && !f->zero)
 		ft_print_char(f->width - s_size, ' ', f);
