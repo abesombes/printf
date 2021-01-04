@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils_str.c                                     :+:      :+:    :+:   */
+/*   ft_putc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/22 17:23:43 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 19:11:11 by abesombe         ###   ########.fr       */
+/*   Created: 2021/01/03 12:12:45 by abesombe          #+#    #+#             */
+/*   Updated: 2021/01/03 12:46:06 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-int	ft_count_letters(char *str, t_printf *f)
+int	ft_count_padlspaces(t_printf *f)
 {
-	int	n_letters;
-
-	n_letters = 0;
-	if (str == NULL)
+	if (f->minus)
 		return (0);
-	if (f->precision >= 0 && f->precision < ft_strlen(str))
-		n_letters = f->precision;
-	else
-		while (str[n_letters])
-			n_letters++;
-	return (n_letters);
+	if (f->width > 1)
+		return (f->width - 1);
+	return (0);
+}
+
+int	ft_count_padrspaces(t_printf *f)
+{
+	if (f->minus)
+		return (f->width - 1);
+	return (0);
+}
+
+void	ft_putc(unsigned char c, t_printf *f)
+{
+	if (f->width < 0)
+		f->minus = 1;
+	f->width = ft_abs(f->width);
+	ft_print_char(ft_count_padlspaces(f), ' ', f);
+	ft_putchar_f(c, f);
+	ft_print_char(ft_count_padrspaces(f), ' ', f);
 }

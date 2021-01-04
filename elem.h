@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 16:52:52 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/03 17:03:11 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_printf
 	int		displayed;
 	int		width;
 	int		precision;
+	t_bool		star;
 	t_bool	minus;
 	t_bool	plus;
 	t_bool	space;

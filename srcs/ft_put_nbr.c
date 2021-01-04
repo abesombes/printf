@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/02 19:57:21 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/04 23:41:42 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_print_nbr_block(long long n, t_printf *f, int n_size)
 		ft_putchar_f(' ', f);
 	else if (n < 0)
 		ft_putchar_f('-', f);
-	n_digits = ft_count_digits(n);
+	n_digits = ft_count_digits(n, f);
 	nb = ft_abs(n);
 	if (f->precision > n_digits)
 		ft_print_char(f->precision - n_digits, '0', f);
@@ -31,7 +31,8 @@ void	ft_print_nbr_block(long long n, t_printf *f, int n_size)
 		ft_print_char(f->width - n_size, '0', f);
 	else if (f->precision < 0 && f->zero && !f->minus && n < 0 && f->width > n_size)
 		ft_print_char(f->width - n_size, '0', f);
-	ft_putnbr_f(nb, f);
+	if (nb != 0 || f->precision !=0)
+		ft_putnbr_f(nb, f);
 }
 
 void	ft_print_char(int n, char c, t_printf *f)
@@ -72,12 +73,12 @@ void	ft_put_nbr(long long n, t_printf *format, int n_size)
 	pls = ft_count_pad_lspaces(n, format);
 	plz = ft_count_pad_lzeros(n, format);
 	f = *format;
-	printf("n_size: %i - pls: %i - plz: %i", n_size, pls, plz);
-	if (!f.minus && f.width > n_size && pls > 0)
+	printf("width = %i - precision = %i", f.width, f.precision);
+	if ((!f.minus || (f.minus && !ft_count_digits(n, format))) && f.width > n_size && pls > 0)
 		ft_print_char(pls, ' ', format);
 	else if (!f.minus && f.width > n_size && plz > 0)
 		ft_print_char(plz, '0', format);
 	ft_print_nbr_block(n, format, n_size);
-	if (f.width > n_size && f.minus)
+	if (f.width > n_size && f.minus && (f.conv_spec != 'd' || ft_count_digits(n, format)))
 		ft_print_pad_right(format, n_size);
 }

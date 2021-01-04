@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 12:34:28 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 00:11:48 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/03 17:02:58 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_reset(t_printf *format)
 	format->precision = -1;
 	format->minus = 0;
 	format->plus = 0;
+	format->star = 0;
 	format->space = 0;
 	format->alternate = 0;
 	format->zero = 0;

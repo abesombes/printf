@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:38:00 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/30 17:06:24 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/04 23:28:33 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@
 # include <unistd.h>
 # include "elem.h"
 
+int			ft_count_ptr_pad_lzeros(double nb, t_printf *f);
+int			ft_count_ptr_pad_lspaces(double nb, t_printf *f);
+int			ft_count_ptr_pad_rspaces(double nb, t_printf *format);
+void		ft_print_0x(t_printf *f);
+void		ft_put_ptr_nbr_hexa_lc(unsigned long long i, t_printf *f);
+int			ft_count_ptr_hexsize(unsigned long long nb, t_printf *f);
+int			ft_count_ptr_hex_digits(unsigned long long n);
+void		ft_print_ptr_hexnbr_block(unsigned long long n, t_printf *f, int n_size);
+void		ft_putptr_hex(unsigned long long n, t_printf *f, int n_size);
+void		ft_putc(unsigned char c, t_printf *f);
 int			ft_strlen(const char *s);
 void    	ft_putnbr_f(long long n, t_printf *f);
 void		ft_putchar_f(unsigned char c, t_printf *f);
@@ -43,7 +53,7 @@ void		ft_put_exp_before_after(double n, t_printf *f, int n_size);
 void		ft_print_exp(int exp, t_printf *f);
 void		ft_putexp(double n, t_printf *f);
 void		ft_put_str(char *s, t_printf *f, int s_size);
-void		ft_putstrn(char *str, int n);
+void		ft_putstrn(char *str, int n, t_printf *f);
 int			ft_count_letters(char *str, t_printf *f);
 long long	ft_ten_power(int nb);
 long long	ft_max(long long a, long long b);
@@ -57,7 +67,7 @@ void		ft_put_nbr(long long n, t_printf *format, int n_size);
 void		ft_putnbr_hex(long long i, t_printf *format, int n_size);
 void		ft_print_hexnbr_block(long long n, t_printf *format, int n_size);
 int			ft_count_charsize(long long nb, t_printf *format);
-int			ft_count_digits(long long n);
+int			ft_count_digits(long long n, t_printf *format);
 int			ft_count_pad_lzeros(double nb, t_printf *format);
 int			ft_count_pad_lspaces(double nb, t_printf *format);
 int			ft_count_pad_rspaces(double nb, t_printf *format);
@@ -69,5 +79,6 @@ int			ft_count_hex_digits(long long n);
 void		ft_print_nbr_block(long long n, t_printf *f, int n_size);
 void		ft_print_pad_left(long long n, t_printf *format, int n_size);
 void		ft_print_hexa_uc_or_lc(long long n, t_printf *f);
+void		ft_parse_stars(const char *str, t_printf *format, va_list *va);
 
 #endif

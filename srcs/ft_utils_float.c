@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 10:30:49 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/02 23:33:26 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/04 21:50:43 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_increment_fsize(int *f_size, t_printf *f, long long dec_part)
 {
 	if (dec_part > 0)
-		*f_size += ft_count_digits(dec_part) + 1;
+		*f_size += ft_count_digits(dec_part, f) + 1;
 	if (dec_part == 0 && f->alternate)
 		(*f_size)++;
 }
@@ -39,8 +39,8 @@ int	ft_count_floatsize(double n, t_printf *f)
 	dec_part = (long long)((n - int_part)*ft_ten_power(i + 1));
 	dec_part = ft_abs(ft_float_rounding(dec_part, int_part, i, n));
 	if (f->precision < 0)
-		return ((f_size += ft_count_digits(int_part) + 7));
-	f_size += ft_count_digits(int_part);
+		return ((f_size += ft_count_digits(int_part, f) + 7));
+	f_size += ft_count_digits(int_part, f);
 	if (f->precision > 0)
 		return (f_size += f->precision + 1);
 	ft_increment_fsize(&f_size, f, dec_part);

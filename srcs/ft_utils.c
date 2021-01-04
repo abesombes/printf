@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:45:17 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/02 23:29:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/04 22:05:57 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_count_pad_lzeros(double nb, t_printf *f)
 	else if (ft_is_charset("e", f->conv_spec))
 		n_digits = ft_count_expsize(nb, f);
 	else
-		n_digits = ft_count_digits(nb);
+		n_digits = ft_count_digits(nb, f);
 	if (f->minus || (f->zero && (f->precision >= 0 || n < 0 || nb < 0)))
 		return (0);
 	plz = ft_max(f->precision, n_digits);
@@ -78,9 +78,9 @@ int	ft_count_pad_lspaces(double nb, t_printf *f)
 	else if (ft_is_charset("efg", f->conv_spec))
 		n_digits = ft_count_floatsize(nb, f);
 	else
-		n_digits = ft_count_digits(nb);
-	if (f->minus || (f->zero && f->precision < 0) || (f->conv_spec == 'f' && \
-f->zero && f->width > f->precision && !f->minus))
+		n_digits = ft_count_digits(nb, f);
+	if ((f->minus && n_digits) || (f->zero && f->precision < 0) || (f->conv_spec == \
+'f' && f->zero && f->width > f->precision && !f->minus))
 		return (0);
 	pls = ft_max(f->precision, n_digits);
 	if (f->conv_spec == 'p' || (ft_is_charset("xX", f->conv_spec) && f->alternate))
@@ -89,6 +89,8 @@ f->zero && f->width > f->precision && !f->minus))
 		return (f->width - ft_count_expsize(nb, f));
 	else if ((ft_is_charset("dxX", f->conv_spec)) && (n < 0 || f->space || f->plus))
 		pls++;
+	if (f->conv_spec == 'd' && (int)nb == 0 && f->precision == 0)
+		return (f->width);
 	return (f->width - pls);
 }
 
@@ -108,7 +110,7 @@ int	ft_count_pad_rspaces(double nb, t_printf *format)
 		n_digits = ft_count_hex_digits(nb);
 	else
 	{
-		n_digits = ft_count_digits(nb);
+		n_digits = ft_count_digits(nb, format);
 		if (n < 0 || f.space || f.plus)
 			extra++;
 	}
@@ -117,7 +119,7 @@ int	ft_count_pad_rspaces(double nb, t_printf *format)
 	return (0);
 }
 
-int	ft_count_digits(long long n)
+int	ft_count_digits(long long n, t_printf *f)
 {
 	long long	nb;
 	int			n_digit;
@@ -129,6 +131,7 @@ int	ft_count_digits(long long n)
 		n_digit++;
 		nb = nb / 10;
 	}
-	n_digit++;
+	if (n != 0 || f->conv_spec != 'd' || f->precision != 0)
+		n_digit++;
 	return (n_digit);
 }

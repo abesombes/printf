@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstrn.c                                       :+:      :+:    :+:   */
+/*   ft_utils_parsing_3.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/22 19:05:19 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 19:00:57 by abesombe         ###   ########.fr       */
+/*   Created: 2021/01/04 23:10:13 by abesombe          #+#    #+#             */
+/*   Updated: 2021/01/05 00:36:54 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-void	ft_putstrn(char *str, int n, t_printf *f)
+void	ft_parse_stars(const char *str,  t_printf *format, va_list *va)
 {
-	int	i;
-
+	int 			i;
+	
 	i = 0;
-	if (str == 0 && f->precision > 0)
-		ft_putstrn("(null)", f->precision, f);
-	else if (str != 0)
+	if (format->star > 0)
 	{
-		while (str[i] && i < n)
-		{
-			ft_putchar_f(str[i], f);
+		while (str[i] && str[i] != '*')
 			i++;
+		if (str[i] && str[i] == '*')
+		{
+			if (str[i - 1] == '.')
+				format->precision = va_arg(*va, int);
+			else
+			{
+				format->width = va_arg(*va, int);
+				if (format->width < 0)
+				{
+					format->minus = 1;
+					format->width = -format->width;
+				}
+			}
 		}
 	}
 }

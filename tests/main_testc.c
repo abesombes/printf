@@ -1,90 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_testd.c                                       :+:      :+:    :+:   */
+/*   main_testc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 09:55:52 by abesombe          #+#    #+#             */
-/*   Updated: 2020/12/12 11:01:38 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/03 12:33:17 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 int main(void)
 {
-	int d = 21;
+	printf("\n----------------------------------------");
+	printf("\n-------------- TEST 1 ------------------");
+	printf("\n----------------------------------------");
+	printf("\n[%10c]\n", '0');
+	ft_printf("[%10c]\n", '0');
+	printf("\n----------------------------------------");
+	printf("\n-------------- TEST 2 ------------------");
+	printf("\n----------------------------------------");
+	printf("\n[%*c]\n", -2, '0');
+	ft_printf("[%*c]\n", -2, '0');
 
-	printf("\n\n--------TEST D = 21 POSITIVE NUMBER ---------"); 
-	printf("\n\n--------TEST 1---------");
-	printf("\n[%d]", d);
-	ft_printf("[%d]", d);
-	printf("\n\n--------TEST 2---------");
-	printf("\n[%5d]", d);
-	ft_printf("[%5d]", d);
-	printf("\n\n--------TEST 3---------");
-	printf("\n[%-5d]", d);
-	ft_printf("[%-5d]", d);
-	printf("\n\n--------TEST 4---------");
-	printf("\n[%05d]", d);
-	ft_printf("[%05d]", d);
-	printf("\n\n--------TEST 5---------");
-	printf("\n[%+5d]", d);
-	ft_printf("[%+5d]", d);
-	printf("\n\n--------TEST 6---------");
-	printf("\n[%+05d]", d);
-	ft_printf("[%+05d]", d);
-	printf("\n\n--------TEST 7---------");
-	printf("\n[%+-5d]", d);
-	ft_printf("[%+-5d]", d);
-	printf("\n\n--------TEST 8---------");
-	printf("\n[%+d]", d);
-	ft_printf("[%+d]", d);
-	
-	d = -21;
-	printf("\n\n--------TEST D = -21 NEGATIVE NUMBER ---------"); 
-	printf("\n\n--------TEST 1---------");
-	printf("\n[%d]", d);
-	ft_printf("[%d]", d);
-	printf("\n\n--------TEST 2---------");
-	printf("\n[%5d]", d);
-	ft_printf("[%5d]", d);
-	printf("\n\n--------TEST 3---------");
-	printf("\n[%-5d]", d);
-	ft_printf("[%-5d]", d);
-	printf("\n\n--------TEST 4---------");
-	printf("\n[%05d]", d);
-	ft_printf("[%05d]", d);
-	printf("\n\n--------TEST 5---------");
-	printf("\n[%+5d]", d);
-	ft_printf("[%+5d]", d);
-	printf("\n\n--------TEST 6---------");
-	printf("\n[%+05d]", d);
-	ft_printf("[%+05d]", d);
-	printf("\n\n--------TEST 7---------");
-	printf("\n[%+5d]", d);
-	ft_printf("[%+5d]", d);
-	printf("\n\n--------TEST 8---------");
-	printf("\n[%+d]", d);
-	ft_printf("[%+d]", d);
-	printf("\n\n--------TEST 9---------");
-	printf("\n[%-d]", d);
-	ft_printf("[%-d]", d);
-	printf("\n\n--------TEST 10---------");
-	printf("\n[%+-05d]", d);
-	ft_printf("[%+-05d]", d);
-	printf("\n\n--------TEST 11---------");
-	printf("\n[%05.d]", d);
-	ft_printf("[%05.d]", d);
-	printf("\n\n--------TEST 12---------");
-	printf("\n[%.1d]", d);
-	ft_printf("[%.1d]", d);
-	printf("\n\n--------TEST 13---------");
-	printf("\n[%0.1d]", d);
-	ft_printf("[%0.1d]", d);
-	printf("\n\n--------TEST 14---------");
-	printf("\n[%08.1d]", d);
-	ft_printf("[%08.1d]", d);
+/*
+	TEST(2, print(" %c ", '0'));
+	TEST(3, print("10%c", '0'));
+	TEST(4, print("%10c", '0'));
+	TEST(5, print("-10%c", '0'));
+	TEST(6, print("%-10c", '0'));
+	TEST(7, print("%-10c", '0'));
+	TEST(8, print("%*c", 1, '0'));
+	TEST(9, print("%*c", 0, '0'));
+	TEST(10, print("%*c", 2, '0'));
+	TEST(11, print("%*c", -2, '0'));
+	TEST(12, print("%*c", 0, '0'));
+	TEST(13, print("%*c", 10, '0'));
+	TEST(14, print("%*c", -10, '0'));
+	TEST(15, print("%*c%*c", -10, '0', 10, '1'));
+	TEST(16, print("*%c%*c", '0', 10, '1'));
+	TEST(17, print("%*c%c*", -10, '0', '1'));
+	TEST(18, print("%-10c*",'0'));
+	TEST(19, print("%-10c%*c%c*",'0', 10, '1', '2'));
+	TEST(20, print("%c%c%c*",'0', '1', '2'));
+	TEST(21, print("%-c%-c%c*", 1, '0', 0));
+	TEST(22, print("%c", '0' - 256));
+	TEST(23, print("%c", '0' + 256));
+	TEST(24, print("%c", 0));
+	TEST(25, print("0%c", 0));
+	TEST(26, print("%c", -129));
+	TEST(27, print("%c", 128));
+	TEST(28, print("%-*c", 10, "1"));
+	TEST(29, print(" -%*c* -%-*c* ", -2, 0, 2, 0));
+	TEST(30, print(" -%-*c* -%-*c* ", 2, 0, -2, 0));
+	TEST(31, print(" -%*c* -%-*c* ", -1, 0, 1, 0));
+	TEST(32, print(" -%-*c* -%-*c* ", 2, 0, -2, 0));
+	TEST(33, print(" -%-2c* -%2c* ", 0, 0));*/
 }

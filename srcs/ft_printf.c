@@ -6,13 +6,13 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:35:41 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/02 00:49:42 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 00:29:30 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	ft_launch_cfegps(char conv_spec, t_printf *format, va_list *va)
+void	ft_launch_fegps(char conv_spec, t_printf *format, va_list *va)
 {
 	double	f;
 	void	*p;
@@ -28,7 +28,7 @@ void	ft_launch_cfegps(char conv_spec, t_printf *format, va_list *va)
 	else if (conv_spec == 'p')
 	{
 		p = va_arg(*va, void *);
-		ft_putnbr_hex((long long)p, format, ft_count_hexsize((long long)p, \
+		ft_putptr_hex((unsigned long long)p, format, ft_count_ptr_hexsize((unsigned long long)p, \
 format));
 	}
 	else if (conv_spec == 's')
@@ -73,20 +73,18 @@ int	ft_finish_parsing(const char *str, int i, va_list *va, t_printf *format)
 	return (total_nb_displayed_chars);
 }
 
-void	ft_parse_width(char conv_spec, t_printf *format, va_list *va)
+void	ft_launch_c(char conv_spec, t_printf *format, va_list *va)
 {
 	unsigned char	c;
-
-	if (format->width == 0)
-		format->width = va_arg(*va, int);
+	
 	if (conv_spec && ft_is_conv_spec(conv_spec) == 1)
 	{
 		if (conv_spec == 'c')
 		{
 			c = va_arg(*va, int);
-			ft_putchar_f(c, format);
+			ft_putc(c, format);
 		}
-		ft_launch_cfegps(conv_spec, format, va);
+		ft_launch_fegps(conv_spec, format, va);
 	}
 }
 
@@ -110,7 +108,8 @@ int	ft_printf(const char *str, ...)
 		if (str[i] && str[i + 1] && str[i] == '%' && str[i + 1] != '%')
 		{
 			ft_parse_format(str, format, i, &j);
-			ft_parse_width(str[i + j], format, &va);
+			ft_parse_stars(str + i, format, &va);
+			ft_launch_c(str[i + j], format, &va);
 		}
 		else if (str[i] && str[i + 1] && str[i] == '%' && str[i + 1] == '%')
 			ft_putchar_f('%', format);
