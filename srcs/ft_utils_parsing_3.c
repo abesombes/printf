@@ -6,21 +6,28 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 23:10:13 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/05 00:36:54 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 00:57:09 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_parse_stars(const char *str,  t_printf *format, va_list *va)
+void	ft_parse_stars(const char *str, t_printf *format, va_list *va)
 {
 	int 			i;
-	
+
 	i = 0;
-	if (format->star > 0)
+	while (str[i] && str[i] != '*' && !ft_is_charset("cspdiuxXnfge", str[i]))
+		i++;	
+	if (format->star == 2)
 	{
+		format->width = va_arg(*va, int);
 		while (str[i] && str[i] != '*')
 			i++;
+		format->precision = va_arg(*va, int);
+	}
+	else if (format->star == 1)
+	{
 		if (str[i] && str[i] == '*')
 		{
 			if (str[i - 1] == '.')

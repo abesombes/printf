@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/13 13:58:43 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 22:17:05 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 19:11:00 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_print_hexnbr_block(long long n, t_printf *f, int n_size)
 {
 	int	n_digits;
 
-	n_digits = ft_count_hex_digits(n);
+	n_digits = ft_count_hex_digits(n, f);
 	if (f->precision > n_digits)
 	{
 		if (f->alternate || f->conv_spec == 'p')
@@ -53,7 +53,8 @@ f->precision >= 0 || f->alternate))
 !ft_count_pad_rspaces(n, f) && f->width > ft_max(ft_count_pad_lspaces(n, f), \
 ft_count_pad_lzeros(n, f) + n_size))
 		ft_print_char(f->width - n_size, '0', f);
-	ft_print_hexa_uc_or_lc(n, f);
+	if (n != 0 || f->precision != 0)
+		ft_print_hexa_uc_or_lc(n, f);
 }
 
 void	ft_putnbr_hex(long long n, t_printf *f, int n_size)

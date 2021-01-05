@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:31:22 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/04 23:41:42 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 14:37:58 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void	ft_put_nbr(long long n, t_printf *format, int n_size)
 	pls = ft_count_pad_lspaces(n, format);
 	plz = ft_count_pad_lzeros(n, format);
 	f = *format;
-	printf("width = %i - precision = %i", f.width, f.precision);
+//	printf("format->conv_spec: %c - format->minus = %i - pls = %i - plz = %i - width = %i - n_size = %i - precision = %i", f.conv_spec, f.minus, pls, plz, f.width, n_size, f.precision);
 	if ((!f.minus || (f.minus && !ft_count_digits(n, format))) && f.width > n_size && pls > 0)
 		ft_print_char(pls, ' ', format);
 	else if (!f.minus && f.width > n_size && plz > 0)
 		ft_print_char(plz, '0', format);
 	ft_print_nbr_block(n, format, n_size);
-	if (f.width > n_size && f.minus && (f.conv_spec != 'd' || ft_count_digits(n, format)))
+	if (f.width > n_size && f.minus && (!ft_is_charset("diuxX", f.conv_spec) || ft_count_digits(n, format)))
 		ft_print_pad_right(format, n_size);
 }

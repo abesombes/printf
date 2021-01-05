@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:45:17 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/04 22:05:57 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 19:09:20 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_count_pad_lzeros(double nb, t_printf *f)
 	n = nb;
 	plz = 0;
 	if (ft_is_charset("pxX", f->conv_spec))
-		n_digits = ft_count_hex_digits(nb);
+		n_digits = ft_count_hex_digits(nb, f);
 	else if (ft_is_charset("f", f->conv_spec))
 		n_digits = ft_count_floatsize(nb, f);
 	else if (ft_is_charset("e", f->conv_spec))
@@ -74,7 +74,7 @@ int	ft_count_pad_lspaces(double nb, t_printf *f)
 	n = nb;
 	pls = 0;
 	if (ft_is_charset("pxX", f->conv_spec))
-		n_digits = ft_count_hex_digits(nb);
+		n_digits = ft_count_hex_digits(nb, f);
 	else if (ft_is_charset("efg", f->conv_spec))
 		n_digits = ft_count_floatsize(nb, f);
 	else
@@ -87,9 +87,9 @@ int	ft_count_pad_lspaces(double nb, t_printf *f)
 		pls = pls + 2;
 	else if (f->conv_spec == 'e')
 		return (f->width - ft_count_expsize(nb, f));
-	else if ((ft_is_charset("dxX", f->conv_spec)) && (n < 0 || f->space || f->plus))
+	else if ((ft_is_charset("udixX", f->conv_spec)) && (n < 0 || f->space || f->plus))
 		pls++;
-	if (f->conv_spec == 'd' && (int)nb == 0 && f->precision == 0)
+	if (ft_is_charset("udixX", f->conv_spec) && (int)nb == 0 && f->precision == 0)
 		return (f->width);
 	return (f->width - pls);
 }
@@ -107,7 +107,7 @@ int	ft_count_pad_rspaces(double nb, t_printf *format)
 	prs = 0;
 	extra = 0;
 	if (ft_is_charset("pxX", f.conv_spec))
-		n_digits = ft_count_hex_digits(nb);
+		n_digits = ft_count_hex_digits(nb, format);	
 	else
 	{
 		n_digits = ft_count_digits(nb, format);
@@ -131,7 +131,7 @@ int	ft_count_digits(long long n, t_printf *f)
 		n_digit++;
 		nb = nb / 10;
 	}
-	if (n != 0 || f->conv_spec != 'd' || f->precision != 0)
+	if (n != 0 || !ft_is_charset("udixX", f->conv_spec) || f->precision != 0)
 		n_digit++;
 	return (n_digit);
 }

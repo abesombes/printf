@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 11:35:05 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/04 23:48:08 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 01:26:40 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ int	ft_parse_format(const char *str, t_printf *format, int i, int *j)
 	{
 		(*j)++;
 		if (str[i + *j] && str[i + *j] == '*')
+		{
 			format->star++;
+			(*j)++;
+		}
 		format->precision = 0;
 		while (str[i + *j] && str[i + *j] >= '0' && str[i + *j] <= '9')
 			format->precision = format->precision * 10 + str[i + (*j)++] - 48;

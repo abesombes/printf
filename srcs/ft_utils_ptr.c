@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:21:11 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 22:29:03 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 19:10:20 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_count_ptr_pad_lspaces(double nb, t_printf *f)
 	n = nb;
 	pls = 0;
 	if (ft_is_charset("p", f->conv_spec))
-		n_digits = ft_count_hex_digits(nb);
+		n_digits = ft_count_hex_digits(nb, f);
 	if (f->minus || (f->zero && f->precision < 0))
 		return (0);
 	pls = ft_max(f->precision, n_digits) + 2;
@@ -62,7 +62,7 @@ int	ft_count_ptr_pad_rspaces(double nb, t_printf *format)
 	prs = 0;
 	extra = 0;
 	if (ft_is_charset("p", f.conv_spec))
-		n_digits = ft_count_hex_digits(nb);
+		n_digits = ft_count_hex_digits(nb, format);
 	if (f.minus)
 		return (ft_max(f.width - f.precision, f.width - n_digits) - extra);
 	return (0);

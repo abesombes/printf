@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:38:00 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/04 23:28:33 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 19:05:02 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void		ft_print_pad_right(t_printf *format, int n_size);
 void		ft_put_nbr_hexa_lc(long long i, t_printf *f);
 void		ft_put_nbr_hexa_uc(long long i, t_printf *f);
 int			ft_count_hexsize(long long nb, t_printf *f);
-int			ft_count_hex_digits(long long n);
+int			ft_count_hex_digits(long long n, t_printf *f);
 void		ft_print_nbr_block(long long n, t_printf *f, int n_size);
 void		ft_print_pad_left(long long n, t_printf *format, int n_size);
 void		ft_print_hexa_uc_or_lc(long long n, t_printf *f);

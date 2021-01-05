@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 17:50:20 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 00:04:00 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/05 19:09:41 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_count_hexsize(long long nb, t_printf *f)
 	long long	n;
 
 	n = nb;
-	n_size = ft_count_hex_digits(nb);
+	n_size = ft_count_hex_digits(nb, f);
 	if (ft_is_charset("xX", f->conv_spec))
 		f->plus = 0;
 	if (f->conv_spec == 'p' && f->alternate)
@@ -48,7 +48,7 @@ int	ft_count_hexsize(long long nb, t_printf *f)
 	return (n_size);
 }
 
-int	ft_count_hex_digits(long long n)
+int	ft_count_hex_digits(long long n, t_printf *f)
 {
 	long long	nb;
 	int			n_digit;
@@ -60,6 +60,7 @@ int	ft_count_hex_digits(long long n)
 		n_digit++;
 		nb = nb / 16;
 	}
-	n_digit++;
+	if (n != 0 || f->precision != 0)
+		n_digit++;
 	return (n_digit);
 }
