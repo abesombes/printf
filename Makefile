@@ -6,7 +6,7 @@
 #    By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/28 11:49:11 by abesombe          #+#    #+#              #
-#    Updated: 2021/01/04 23:26:58 by abesombe         ###   ########.fr        #
+#    Updated: 2021/01/05 20:39:11 by abesombe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,7 @@ SRC =		$(SRC_DIR)/ft_printf.c \
 			$(SRC_DIR)/ft_utils_parsing.c \
 			$(SRC_DIR)/ft_utils_parsing_2.c \
 			$(SRC_DIR)/ft_utils_parsing_3.c
-OBJ_DIR =	objs
-OBJ =		$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+OBJ =		$(patsubst $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, $(SRC))
 
 HEAD =		-I.
 CFLAGS =	-Wall -Werror -Wextra
@@ -53,15 +52,13 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(OBJ_DIR)
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(HEAD) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 
 re: fclean all
