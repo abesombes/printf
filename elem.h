@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 17:03:11 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/06 22:22:04 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_printf
 	t_bool	minus;
 	t_bool	plus;
 	t_bool	space;
+	t_bool	sign_display;
 	int		alternate;
 	t_bool	zero;
 	t_bool	uc_x;

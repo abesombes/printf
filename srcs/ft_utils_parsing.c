@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 12:34:28 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 17:02:58 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/07 22:01:12 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_reset(t_printf *format)
 	format->minus = 0;
 	format->plus = 0;
 	format->star = 0;
+	format->sign_display = 0;
 	format->space = 0;
 	format->alternate = 0;
 	format->zero = 0;
@@ -33,10 +34,10 @@ int	ft_is_conv_spec(char c)
 	int		i;
 
 	i = 0;
-	conv_spec = "cspdiuxXnfge";
+	conv_spec = "cspdiuxXnfge%";
 	while (conv_spec[i] && conv_spec[i] != c)
 		i++;
-	if (i > 11)
+	if (i > 12)
 		return (0);
 	return (1);
 }
@@ -47,10 +48,10 @@ int	ft_is_flag(char c)
 	int		i;
 
 	i = 0;
-	flags = "*0+ -#";
+	flags = "*0+ -#lh";
 	while (flags[i] && flags[i] != c)
 		i++;
-	if (i > 5)
+	if (i > 7)
 		return (0);
 	return (1);
 }

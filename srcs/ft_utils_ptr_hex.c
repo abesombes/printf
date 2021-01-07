@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 21:53:09 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 22:14:05 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/07 19:19:27 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ int	ft_count_ptr_hexsize(unsigned long long nb, t_printf *f)
 
 int	ft_count_ptr_hex_digits(unsigned long long n)
 {
-	unsigned long long	nb;
-	int					n_digit;
+	int	n_digit;
 
 	n_digit = 0;
-	nb = ft_abs(n);
-	while (nb > 15)
+	while (n > 15)
 	{
 		n_digit++;
-		nb = nb / 16;
+		n = n / 16;
+	//	printf("\nn = %llu\n", n);
 	}
 	n_digit++;
+//	printf("n_digit: %i", n_digit);
 	return (n_digit);
 }

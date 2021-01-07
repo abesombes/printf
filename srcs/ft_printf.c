@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:35:41 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/05 20:12:29 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/07 23:15:18 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ format));
 
 void	ft_launch_udix(char conv_spec, t_printf *format, va_list *va)
 {
-	int	k;
+	long long	k;
 
 	if (ft_is_charset("udixX", conv_spec))
 	{
@@ -58,10 +58,12 @@ void	ft_launch_udix(char conv_spec, t_printf *format, va_list *va)
 				format->plus = 0;
 			if (conv_spec == 'u' && format->space)
 				format->space = 0;
-			if	(conv_spec == 'u')
+			if	(conv_spec == 'u' && ft_is_charset("lL", format->length))
+				ft_put_nbr((unsigned long long)k, format, ft_count_charsize((unsigned long long)k, format));
+			else if	(conv_spec == 'u')
 				ft_put_nbr((unsigned int)k, format, ft_count_charsize((unsigned int)k, format));
 			else	
-				ft_put_nbr((int)k, format, ft_count_charsize(k, format));
+				ft_put_nbr((int)k, format, ft_count_charsize((int)k, format));
 		}
 	}
 }
@@ -82,6 +84,9 @@ void	ft_launch_c(char conv_spec, t_printf *format, va_list *va)
 {
 	unsigned char	c;
 	
+	//printf("f->alternate: [%i] - f->zero: [%i] - f->conv_spec: [%c] - width: [%i] - precision: [%i]", format->alternate, format->zero, format->conv_spec, format->width, format->precision);
+	if (format->conv_spec == '%' || format->conv_spec == 0)
+		ft_putc(conv_spec, format);
 	if (conv_spec && ft_is_conv_spec(conv_spec) == 1)
 	{
 		if (conv_spec == 'c')

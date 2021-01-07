@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 21:42:08 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 22:32:46 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/07 19:26:37 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ f->precision >= 0 || f->alternate))
 !ft_count_ptr_pad_rspaces(n, f) && f->width > ft_max(ft_count_ptr_pad_lspaces(n, f), \
 ft_count_ptr_pad_lzeros(n, f) + n_size))
 		ft_print_char(f->width - n_size, '0', f);
-	ft_put_ptr_nbr_hexa_lc(n, f);
+	if (n != 0 || f-> precision != 0) 
+		ft_put_ptr_nbr_hexa_lc(n, f);
 }
 
 void	ft_putptr_hex(unsigned long long n, t_printf *f, int n_size)
@@ -47,6 +48,7 @@ void	ft_putptr_hex(unsigned long long n, t_printf *f, int n_size)
 
 	pls = ft_count_ptr_pad_lspaces(n, f);
 	plz = ft_count_ptr_pad_lzeros(n, f);	
+//	printf("pls: %i - plz: %i", pls, plz);
 	if (!f->minus && f->width > n_size && pls > 0)
 		ft_print_char(pls, ' ', f);
 	else if (!f->minus && f->width > n_size && plz > 0 && !(f->zero && f->alternate))

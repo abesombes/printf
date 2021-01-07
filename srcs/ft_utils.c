@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:45:17 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/05 19:09:20 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/07 14:34:36 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@ int	ft_count_charsize(long long nb, t_printf *format)
 	f = *format;
 	n = nb;
 	size = 0;
-	if (nb < 0)
-		nb = -nb;
+	nb = ft_abs(nb);
 	while (nb > 9)
 	{
 		size++;
 		nb = nb / 10;
 	}
-	size++;
-	if (f.precision >= size)
-		size = f.precision;
+	if (nb != 0 || format->precision != 0)
+		size++;
+	size = ft_max(f.precision, size);
 	if (n < 0 || f.space || f.plus)
 		size++;
 	return (size);
@@ -52,16 +51,21 @@ int	ft_count_pad_lzeros(double nb, t_printf *f)
 		n_digits = ft_count_expsize(nb, f);
 	else
 		n_digits = ft_count_digits(nb, f);
-	if (f->minus || (f->zero && (f->precision >= 0 || n < 0 || nb < 0)))
+	//printf("n_digits: %i", n_digits);
+	if (f->minus || (f->zero && (f->precision >= 0/* || n < 0 || nb < 0*/)))
 		return (0);
 	plz = ft_max(f->precision, n_digits);
+	//printf(" plz: %i ", plz);
 	if ((f->conv_spec == 'p' || (ft_is_charset("xX", f->conv_spec) && \
 f->alternate)) && f->zero)
 		return (0);
 	if (!ft_is_charset("epfxX", f->conv_spec) && (n < 0 || f->space || f->plus))
 		plz++;
-	if (f->plus && f->zero && f->width > plz)
+//	if (f->plus && f->zero && f->width > plz)
+//		return (0);
+	if (!f->zero)
 		return (0);
+//	printf(" plz: %i ", plz);
 	return (f->width - plz);
 }
 
@@ -79,16 +83,20 @@ int	ft_count_pad_lspaces(double nb, t_printf *f)
 		n_digits = ft_count_floatsize(nb, f);
 	else
 		n_digits = ft_count_digits(nb, f);
+//	printf("n_digits: %i", n_digits);
 	if ((f->minus && n_digits) || (f->zero && f->precision < 0) || (f->conv_spec == \
 'f' && f->zero && f->width > f->precision && !f->minus))
 		return (0);
 	pls = ft_max(f->precision, n_digits);
+//	printf("pls: %i", pls);
 	if (f->conv_spec == 'p' || (ft_is_charset("xX", f->conv_spec) && f->alternate))
 		pls = pls + 2;
 	else if (f->conv_spec == 'e')
 		return (f->width - ft_count_expsize(nb, f));
-	else if ((ft_is_charset("udixX", f->conv_spec)) && (n < 0 || f->space || f->plus))
+	else if ((ft_is_charset("di", f->conv_spec)) && (n < 0 || f->space || f->plus))
 		pls++;
+//	else if ((ft_is_charset("uxX", f->conv_spec)) && (f->space))
+//		pls++;
 	if (ft_is_charset("udixX", f->conv_spec) && (int)nb == 0 && f->precision == 0)
 		return (f->width);
 	return (f->width - pls);

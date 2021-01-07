@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/17 17:50:20 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/05 19:09:41 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/07 11:42:29 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_count_hexsize(long long nb, t_printf *f)
 		f->alternate = 0;
 	if (f->conv_spec == 'X')
 		f->uc_x = 1;
-	if (ft_is_charset("xX", f->conv_spec) && f->alternate)
+	if (ft_is_charset("xX", f->conv_spec) && f->alternate && nb > 0)
 		f->conv_spec = 'p';
 	if (f->precision >= n_size)
 		n_size = f->precision;

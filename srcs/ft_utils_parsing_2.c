@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 11:35:05 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/05 01:26:40 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/06 16:22:43 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_parse_format(const char *str, t_printf *format, int i, int *j)
 {
 	ft_reset(format);
 	while (str[i + *j] && ft_is_flag(str[i + *j]) && \
-!ft_is_charset("cspdiuxXnfge", str[i + *j]))
+!ft_is_charset("cspdiuxXnfge%", str[i + *j]))
 		ft_parse_flags(str[i + (*j)++], format);
 	if (str[i + *j] && str[i + *j] >= '0' && str[i + *j] <= '9')
 		format->width = 0;
@@ -79,9 +79,12 @@ int	ft_parse_format(const char *str, t_printf *format, int i, int *j)
 	}
 	if (!str[i + *j])
 		return (-1);
-	format->conv_spec = str[i + *j];
-	ft_parse_length(str[i + *j - 2], str[i + *j - 1], format);
-	while (str[i + *j] && ft_is_conv_spec(str[i + *j]) != 1)
-		(*j)++;
+	if (ft_is_conv_spec(str[i + *j]))
+	{
+		format->conv_spec = str[i + *j];
+		ft_parse_length(str[i + *j - 2], str[i + *j - 1], format);
+	}
+	//while (str[i + *j] && ft_is_conv_spec(str[i + *j]) != 1)
+	//		(*j)++;
 	return (ft_return_minus_one_if_error(str[i + *j]));
 }
