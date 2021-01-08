@@ -27,9 +27,9 @@ int	ft_count_charsize(long long nb, t_printf *format)
 		size++;
 		nb = nb / 10;
 	}
-	if (nb != 0 || format->precision != 0)
+	if (nb != 0 || format->preci != 0)
 		size++;
-	size = ft_max(f.precision, size);
+	size = ft_max(f.preci, size);
 	if (n < 0 || f.space || f.plus)
 		size++;
 	return (size);
@@ -43,21 +43,21 @@ int	ft_count_pad_lzeros(double nb, t_printf *f)
 
 	n = nb;
 	plz = 0;
-	if (ft_is_charset("pxX", f->conv_spec))
+	if (ft_is_charset("pxX", f->conv_s))
 		n_digits = ft_count_hex_digits(nb, f);
-	else if (ft_is_charset("f", f->conv_spec))
+	else if (ft_is_charset("f", f->conv_s))
 		n_digits = ft_count_floatsize(nb, f);
-	else if (ft_is_charset("e", f->conv_spec))
+	else if (ft_is_charset("e", f->conv_s))
 		n_digits = ft_count_expsize(nb, f);
 	else
 		n_digits = ft_count_digits(nb, f);
-	if (f->minus || (f->zero && (f->precision >= 0)))
+	if (f->minus || (f->zero && (f->preci >= 0)))
 		return (0);
-	plz = ft_max(f->precision, n_digits);
-	if ((f->conv_spec == 'p' || (ft_is_charset("xX", f->conv_spec) && \
-f->alternate)) && f->zero)
+	plz = ft_max(f->preci, n_digits);
+	if ((f->conv_s == 'p' || (ft_is_charset("xX", f->conv_s) && \
+	f->alter)) && f->zero)
 		return (0);
-	if (!ft_is_charset("epfxX", f->conv_spec) && (n < 0 || f->space || f->plus))
+	if (!ft_is_charset("epfxX", f->conv_s) && (n < 0 || f->space || f->plus))
 		plz++;
 	if (!f->zero)
 		return (0);
@@ -72,23 +72,23 @@ int	ft_count_pad_lspaces(double nb, t_printf *f)
 
 	n = nb;
 	pls = 0;
-	if (ft_is_charset("pxX", f->conv_spec))
+	if (ft_is_charset("pxX", f->conv_s))
 		n_digits = ft_count_hex_digits(nb, f);
-	else if (ft_is_charset("efg", f->conv_spec))
+	else if (ft_is_charset("efg", f->conv_s))
 		n_digits = ft_count_floatsize(nb, f);
 	else
 		n_digits = ft_count_digits(nb, f);
-	if ((f->minus && n_digits) || (f->zero && f->precision < 0) || (f->conv_spec == \
-'f' && f->zero && f->width > f->precision && !f->minus))
+	if ((f->minus && n_digits) || (f->zero && f->preci < 0) || \
+		(f->conv_s == 'f' && f->zero && f->width > f->preci && !f->minus))
 		return (0);
-	pls = ft_max(f->precision, n_digits);
-	if (f->conv_spec == 'p' || (ft_is_charset("xX", f->conv_spec) && f->alternate))
+	pls = ft_max(f->preci, n_digits);
+	if (f->conv_s == 'p' || (ft_is_charset("xX", f->conv_s) && f->alter))
 		pls = pls + 2;
-	else if (f->conv_spec == 'e')
+	else if (f->conv_s == 'e')
 		return (f->width - ft_count_expsize(nb, f));
-	else if ((ft_is_charset("di", f->conv_spec)) && (n < 0 || f->space || f->plus))
+	else if ((ft_is_charset("di", f->conv_s)) && (n < 0 || f->space || f->plus))
 		pls++;
-	if (ft_is_charset("udixX", f->conv_spec) && (int)nb == 0 && f->precision == 0)
+	if (ft_is_charset("udixX", f->conv_s) && (int)nb == 0 && f->preci == 0)
 		return (f->width);
 	return (f->width - pls);
 }
@@ -105,8 +105,8 @@ int	ft_count_pad_rspaces(double nb, t_printf *format)
 	n = nb;
 	prs = 0;
 	extra = 0;
-	if (ft_is_charset("pxX", f.conv_spec))
-		n_digits = ft_count_hex_digits(nb, format);	
+	if (ft_is_charset("pxX", f.conv_s))
+		n_digits = ft_count_hex_digits(nb, format);
 	else
 	{
 		n_digits = ft_count_digits(nb, format);
@@ -114,7 +114,7 @@ int	ft_count_pad_rspaces(double nb, t_printf *format)
 			extra++;
 	}
 	if (f.minus)
-		return (ft_max(f.width - f.precision, f.width - n_digits) - extra);
+		return (ft_max(f.width - f.preci, f.width - n_digits) - extra);
 	return (0);
 }
 
@@ -130,7 +130,7 @@ int	ft_count_digits(long long n, t_printf *f)
 		n_digit++;
 		nb = nb / 10;
 	}
-	if (n != 0 || !ft_is_charset("udixX", f->conv_spec) || f->precision != 0)
+	if (n != 0 || !ft_is_charset("udixX", f->conv_s) || f->preci != 0)
 		n_digit++;
 	return (n_digit);
 }

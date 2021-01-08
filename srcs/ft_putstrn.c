@@ -17,8 +17,8 @@ void	ft_putstrn(char *str, int n, t_printf *f)
 	int	i;
 
 	i = 0;
-	if (str == 0 && f->precision > 0)
-		ft_putstrn("(null)", f->precision, f);
+	if (str == 0 && f->preci > 0)
+		ft_putstrn("(null)", f->preci, f);
 	else if (str != 0)
 	{
 		while (str[i] && i < n)

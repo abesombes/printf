@@ -18,10 +18,10 @@ void	ft_print_int_dec(double n, double nb, int def_pr, t_printf *f)
 	long long	dec_part;
 
 	int_part = (long long)nb;
-	dec_part = (long long)((nb - int_part)*ft_ten_power(def_pr + 1));
+	dec_part = (long long)((nb - int_part) * ft_ten_power(def_pr + 1));
 	dec_part = ft_exp_rounding(dec_part);
 	ft_putnbr_f(int_part, f);
-	if (f->precision || (!f->precision && f->alternate))
+	if (f->preci || (!f->preci && f->alter))
 		ft_putchar_f('.', f);
 	ft_zeros_after_dot_exp(ft_abs(n), dec_part, f);
 	if (ft_abs(dec_part) > 0)
@@ -48,7 +48,7 @@ void	ft_calc_exp(double *nb, int *exp)
 	}
 }
 
-int	ft_count_dec_size(long long *dec_part)
+int		ft_count_dec_size(long long *dec_part)
 {
 	int	dec_size;
 
@@ -61,7 +61,7 @@ int	ft_count_dec_size(long long *dec_part)
 	return (dec_size);
 }
 
-int	ft_count_expsize(double n, t_printf *f)
+int		ft_count_expsize(double n, t_printf *f)
 {
 	double	nb;
 	int		f_size;
@@ -70,9 +70,9 @@ int	ft_count_expsize(double n, t_printf *f)
 	f_size = 0;
 	if (n < 0 || f->space || f->plus)
 		f_size = 1;
-	if (f->precision < 0)
+	if (f->preci < 0)
 		return ((f_size + 1 + 1 + 6 + 4));
-	if (f->precision >= 0)
-		return (f_size + 1 + 1 + f->precision + 4);
+	if (f->preci >= 0)
+		return (f_size + 1 + 1 + f->preci + 4);
 	return (f_size);
 }

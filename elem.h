@@ -20,17 +20,17 @@
 typedef int		t_bool;
 typedef struct s_printf
 {
-	char	conv_spec;
+	char	conv_s;
 	char	length;
 	int		displayed;
 	int		width;
-	int		precision;
+	int		preci;
 	t_bool		star;
 	t_bool	minus;
 	t_bool	plus;
 	t_bool	space;
 	t_bool	sign_display;
-	int		alternate;
+	int		alter;
 	t_bool	zero;
 	t_bool	uc_x;
 }				t_printf;

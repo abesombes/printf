@@ -14,38 +14,44 @@
 
 void	ft_parse_stars(const char *str, t_printf *format, va_list *va)
 {
-	int 			i;
+	int	i;
 
 	i = 1;
 	while (str[i] && str[i] != '*' && !ft_is_charset("cspdiuxXnfge%", str[i]))
-		i++;	
+		i++;
 	if (format->star == 2)
-	{
-		format->width = va_arg(*va, int);
-		if (format->width < 0)
-		{
-			format->minus = 1;
-			format->width = -format->width;
-		}
-		while (str[i] && str[i] != '*')
-			i++;
-		format->precision = va_arg(*va, int);
-	}
+		ft_parse_two_stars(str, format, va);
 	else if (format->star == 1)
+		ft_parse_one_star(str, format, va);
+}
+
+void	ft_parse_one_star(const char *str, t_printf *format, va_list *va)
+{
+	if (str[i] && str[i] == '*')
 	{
-		if (str[i] && str[i] == '*')
+		if (str[i - 1] == '.')
+			format->preci = va_arg(*va, int);
+		else
 		{
-			if (str[i - 1] == '.')
-				format->precision = va_arg(*va, int);
-			else
+			format->width = va_arg(*va, int);
+			if (format->width < 0)
 			{
-				format->width = va_arg(*va, int);
-				if (format->width < 0)
-				{
-					format->minus = 1;
-					format->width = -format->width;
-				}
+				format->minus = 1;
+				format->width = -format->width;
 			}
 		}
 	}
+}
+
+void	ft_parse_two_stars(const char *str, t_printf *format, va_list *va)
+{
+	format->width = va_arg(*va, int);
+	if (format->width < 0)
+	{
+		format->minus = 1;
+		format->width = -format->width;
+	}
+	while (str[i] && str[i] != '*')
+		i++;
+	format->preci = va_arg(*va, int);
 }

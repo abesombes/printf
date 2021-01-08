@@ -19,8 +19,8 @@ int	ft_count_letters(char *str, t_printf *f)
 	n_letters = 0;
 	if (str == NULL)
 		return (0);
-	if (f->precision >= 0 && f->precision < ft_strlen(str))
-		n_letters = f->precision;
+	if (f->preci >= 0 && f->preci < ft_strlen(str))
+		n_letters = f->preci;
 	else
 		while (str[n_letters])
 			n_letters++;

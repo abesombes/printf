@@ -16,11 +16,11 @@ void	ft_increment_fsize(int *f_size, t_printf *f, long long dec_part)
 {
 	if (dec_part > 0)
 		*f_size += ft_count_digits(dec_part, f) + 1;
-	if (dec_part == 0 && f->alternate)
+	if (dec_part == 0 && f->alter)
 		(*f_size)++;
 }
 
-int	ft_count_floatsize(double n, t_printf *f)
+int		ft_count_floatsize(double n, t_printf *f)
 {
 	double		nb;
 	int			i;
@@ -34,15 +34,15 @@ int	ft_count_floatsize(double n, t_printf *f)
 	if (n < 0 || f->space || f->plus)
 		f_size = 1;
 	int_part = (long long)nb;
-	if (f->precision >= 0)
-		i = f->precision;
-	dec_part = (long long)((n - int_part)*ft_ten_power(i + 1));
+	if (f->preci >= 0)
+		i = f->preci;
+	dec_part = (long long)((n - int_part) * ft_ten_power(i + 1));
 	dec_part = ft_abs(ft_float_rounding(dec_part, int_part, i, n));
-	if (f->precision < 0)
+	if (f->preci < 0)
 		return ((f_size += ft_count_digits(int_part, f) + 7));
 	f_size += ft_count_digits(int_part, f);
-	if (f->precision > 0)
-		return (f_size += f->precision + 1);
+	if (f->preci > 0)
+		return (f_size += f->preci + 1);
 	ft_increment_fsize(&f_size, f, dec_part);
 	while (dec_part <= ft_ten_power(--i) && i > 0)
 		f_size++;

@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-void	ft_put_float(double n, t_printf *f, int n_size)
+void		ft_put_float(double n, t_printf *f, int n_size)
 {
 	int	pls;
 	int	plz;
@@ -22,14 +22,14 @@ void	ft_put_float(double n, t_printf *f, int n_size)
 	if (!f->minus && f->width > n_size && pls > 0)
 		ft_print_char(pls, ' ', f);
 	else if (!f->minus && f->width > n_size && plz > 0 && !(f->zero && \
-f->alternate))
+f->alter))
 		ft_print_char(plz, '0', f);
 	ft_putfloat(n, f);
 	if (f->width > n_size && f->minus)
 		ft_print_pad_right(f, n_size);
 }
 
-void	ft_prefix(double n, t_printf *f)
+void		ft_prefix(double n, t_printf *f)
 {
 	if (f->plus && n >= 0)
 		ft_putchar_f('+', f);
@@ -39,15 +39,15 @@ void	ft_prefix(double n, t_printf *f)
 		ft_putchar_f('-', f);
 }
 
-void	ft_zeros_after_dot(double n, t_printf *f)
+void		ft_zeros_after_dot(double n, t_printf *f)
 {
 	int	def_pr;
 	int	i;
 
-	if (f->precision < 0)
+	if (f->preci < 0)
 		def_pr = 6;
 	else
-		def_pr = f->precision;
+		def_pr = f->preci;
 	i = 1;
 	while ((long long)(n * ft_ten_power(i)) % ft_ten_power(i) == 0 && \
 i <= def_pr)
@@ -60,17 +60,18 @@ i <= def_pr)
 	}
 }
 
-long long	ft_float_rounding(long long dec_part, long long int_part, int def_pr, \
-double n)
+long long	ft_float_rounding(long long dec_part, long long int_part, \
+	int def_pr, double n)
 {
 	if (dec_part % 10 > 4)
-		dec_part = (long long)((ft_abs(n) - int_part)*ft_ten_power(def_pr)) + 1;
+		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr)) \
+		+ 1;
 	else
-		dec_part = (long long)((ft_abs(n) - int_part)*ft_ten_power(def_pr));
+		dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr));
 	return (dec_part);
 }
 
-void	ft_putfloat(double n, t_printf *f)
+void		ft_putfloat(double n, t_printf *f)
 {
 	double		nb;
 	int			def_pr;
@@ -83,15 +84,15 @@ void	ft_putfloat(double n, t_printf *f)
 	ft_prefix(n, f);
 	checkz = f->width - ft_count_floatsize(n, f) - ft_max(\
 ft_count_pad_lspaces(n, f), ft_count_pad_lzeros(n, f));
-	if (f->precision >= 0)
-		def_pr = f->precision;
+	if (f->preci >= 0)
+		def_pr = f->preci;
 	if (checkz > 0 && !f->minus)
 		ft_print_char(checkz, '0', f);
 	int_part = (long long)nb;
-	dec_part = (long long)((ft_abs(n) - int_part)*ft_ten_power(def_pr + 1));
+	dec_part = (long long)((ft_abs(n) - int_part) * ft_ten_power(def_pr + 1));
 	dec_part = ft_float_rounding(dec_part, int_part, def_pr, n);
 	ft_putnbr_f(int_part, f);
-	if (f->precision || (!f->precision && f->alternate))
+	if (f->preci || (!f->preci && f->alter))
 		ft_putchar_f('.', f);
 	ft_zeros_after_dot(n, f);
 	if (ft_abs(dec_part) > 0)

@@ -12,54 +12,54 @@
 
 #include "../ft_printf.h"
 
-void	ft_launch_fegps(char conv_spec, t_printf *format, va_list *va)
+void	ft_launch_fegps(char conv_s, t_printf *format, va_list *va)
 {
 	double	f;
 	void	*p;
 
-	if (ft_is_charset("feg", conv_spec))
+	if (ft_is_charset("feg", conv_s))
 	{
 		f = va_arg(*va, double);
-		if (conv_spec == 'f')
+		if (conv_s == 'f')
 			ft_put_float(f, format, ft_count_floatsize(f, format));
 		else
 			ft_put_exp_before_after(f, format, ft_count_expsize(f, format));
 	}
-	else if (conv_spec == 'p')
+	else if (conv_s == 'p')
 	{
 		p = va_arg(*va, void *);
 		ft_putptr_hex((unsigned long long)p, format, \
 				ft_count_ptr_hexsize((unsigned long long)p, format));
 	}
-	else if (conv_spec == 's')
+	else if (conv_s == 's')
 	{
 		p = va_arg(*va, char *);
 		if (!p)
 			p = "(null)";
 		ft_put_str(p, format, ft_count_letters(p, format));
 	}
-	ft_launch_udix(conv_spec, format, va);
+	ft_launch_udix(conv_s, format, va);
 }
 
-void	ft_launch_udix(char conv_spec, t_printf *format, va_list *va)
+void	ft_launch_udix(char conv_s, t_printf *format, va_list *va)
 {
 	long long	k;
 
-	if (ft_is_charset("udixX", conv_spec))
+	if (ft_is_charset("udixX", conv_s))
 	{
-		if (conv_spec == '*')
+		if (conv_s == '*')
 			format->width = va_arg(*va, int);
 		k = va_arg(*va, long long);
-		if (ft_is_charset("xX", conv_spec))
+		if (ft_is_charset("xX", conv_s))
 			ft_putnbr_hex((unsigned int)k, format, \
 					ft_count_hexsize((unsigned int)k, format));
 		else
 		{
-			if (conv_spec == 'u' && format->plus)
+			if (conv_s == 'u' && format->plus)
 				format->plus = 0;
-			if (conv_spec == 'u' && format->space)
+			if (conv_s == 'u' && format->space)
 				format->space = 0;
-			if (conv_spec == 'u')
+			if (conv_s == 'u')
 				ft_put_nbr((unsigned int)k, format, \
 						ft_count_charsize((unsigned int)k, format));
 			else
@@ -80,20 +80,20 @@ int		ft_finish_parsing(const char *str, int i, va_list *va, t_printf *format)
 	return (total_nb_displayed_chars);
 }
 
-void	ft_launch_c(char conv_spec, t_printf *format, va_list *va)
+void	ft_launch_c(char conv_s, t_printf *format, va_list *va)
 {
 	unsigned char	c;
 
-	if (format->conv_spec == '%' || format->conv_spec == 0)
-		ft_putc(conv_spec, format);
-	if (conv_spec && ft_is_conv_spec(conv_spec) == 1)
+	if (format->conv_s == '%' || format->conv_s == 0)
+		ft_putc(conv_s, format);
+	if (conv_s && ft_is_conv_s(conv_s) == 1)
 	{
-		if (conv_spec == 'c')
+		if (conv_s == 'c')
 		{
 			c = va_arg(*va, int);
 			ft_putc(c, format);
 		}
-		ft_launch_fegps(conv_spec, format, va);
+		ft_launch_fegps(conv_s, format, va);
 	}
 }
 

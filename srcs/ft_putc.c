@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-int	ft_count_padlspaces(t_printf *f)
+int		ft_count_padlspaces(t_printf *f)
 {
 	if (f->minus)
 		return (0);
@@ -21,14 +21,14 @@ int	ft_count_padlspaces(t_printf *f)
 	return (0);
 }
 
-int	ft_count_padlzeros(t_printf *f)
+int		ft_count_padlzeros(t_printf *f)
 {
-	if (f->zero && (f->conv_spec == '%' || f->conv_spec == 0 || !f->minus))
+	if (f->zero && (f->conv_s == '%' || f->conv_s == 0 || !f->minus))
 		return (f->width - 1);
 	return (0);
 }
 
-int	ft_count_padrspaces(t_printf *f)
+int		ft_count_padrspaces(t_printf *f)
 {
 	if (f->minus)
 		return (f->width - 1);
@@ -40,7 +40,7 @@ void	ft_putc(unsigned char c, t_printf *f)
 	if (f->width < 0)
 		f->minus = 1;
 	f->width = ft_abs(f->width);
-	if	(f->zero && !f->minus)
+	if (f->zero && !f->minus)
 		ft_print_char(ft_count_padlzeros(f), '0', f);
 	else
 		ft_print_char(ft_count_padlspaces(f), ' ', f);

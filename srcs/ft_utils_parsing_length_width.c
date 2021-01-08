@@ -29,7 +29,7 @@ void	ft_parse_flags(char flag, t_printf *f)
 	else if (flag == ' ')
 		f->space = 1;
 	else if (flag == '#')
-		f->alternate = 1;
+		f->alter = 1;
 	else if (flag == '*')
 		f->star++;
 }
@@ -46,14 +46,14 @@ void	ft_parse_length(char c1, char c2, t_printf *f)
 		f->length = 'H';
 }
 
-int	ft_return_minus_one_if_error(char c)
+int		ft_return_minus_one_if_error(char c)
 {
 	if (!c)
 		return (-1);
 	return (0);
 }
 
-int	ft_parse_format(const char *str, t_printf *format, int i, int *j)
+int		ft_parse_format(const char *str, t_printf *format, int i, int *j)
 {
 	ft_reset(format);
 	while (str[i + *j] && ft_is_flag(str[i + *j]) && \
@@ -73,15 +73,15 @@ int	ft_parse_format(const char *str, t_printf *format, int i, int *j)
 			format->star++;
 			(*j)++;
 		}
-		format->precision = 0;
+		format->preci = 0;
 		while (str[i + *j] && str[i + *j] >= '0' && str[i + *j] <= '9')
-			format->precision = format->precision * 10 + str[i + (*j)++] - 48;
+			format->preci = format->preci * 10 + str[i + (*j)++] - 48;
 	}
 	if (!str[i + *j])
 		return (-1);
-	if (ft_is_conv_spec(str[i + *j]))
+	if (ft_is_conv_s(str[i + *j]))
 	{
-		format->conv_spec = str[i + *j];
+		format->conv_s = str[i + *j];
 		ft_parse_length(str[i + *j - 2], str[i + *j - 1], format);
 	}
 	return (ft_return_minus_one_if_error(str[i + *j]));

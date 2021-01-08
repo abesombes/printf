@@ -22,7 +22,7 @@ void		ft_put_exp_before_after(double n, t_printf *f, int n_size)
 	if (!f->minus && f->width > n_size && pls > 0)
 		ft_print_char(pls, ' ', f);
 	else if (!f->minus && f->width > n_size && plz > 0 && !(f->zero && \
-f->alternate))
+f->alter))
 		ft_print_char(plz, '0', f);
 	ft_putexp(n, f);
 	if (f->width > n_size && f->minus)
@@ -63,10 +63,10 @@ void		ft_zeros_after_dot_exp(double n, long long dec_part, t_printf *f)
 	int		dec_size;
 
 	dec_size = ft_count_dec_size(&dec_part);
-	if (f->precision < 0)
+	if (f->preci < 0)
 		def_pr = 6;
 	else
-		def_pr = f->precision;
+		def_pr = f->preci;
 	i = 1;
 	nb = n;
 	while (nb > 9)
@@ -97,8 +97,8 @@ void		ft_putexp(double n, t_printf *f)
 	ft_prefix(n, f);
 	checkz = f->width - ft_count_expsize(n, f) - ft_max(\
 ft_count_pad_lspaces(n, f), ft_count_pad_lzeros(n, f));
-	if (f->precision >= 0)
-		def_pr = f->precision;
+	if (f->preci >= 0)
+		def_pr = f->preci;
 	if (checkz > 0 && !f->minus)
 		ft_print_char(checkz, '0', f);
 	ft_calc_exp(&nb, &exp);

@@ -25,6 +25,7 @@ SRC =		$(SRC_DIR)/ft_printf.c \
 			$(SRC_DIR)/ft_put_nbr_hex.c \
 			$(SRC_DIR)/ft_put_ptr_hex.c \
 			$(SRC_DIR)/ft_putstrn.c \
+			$(SRC_DIR)/ft_reset_format.c \
 			$(SRC_DIR)/ft_strlen.c \
 			$(SRC_DIR)/ft_utils.c \
 			$(SRC_DIR)/ft_utils_exp.c \
@@ -34,9 +35,9 @@ SRC =		$(SRC_DIR)/ft_printf.c \
 			$(SRC_DIR)/ft_utils_maths.c \
 			$(SRC_DIR)/ft_utils_ptr.c \
 			$(SRC_DIR)/ft_utils_str.c \
-			$(SRC_DIR)/ft_utils_parsing.c \
-			$(SRC_DIR)/ft_utils_parsing_2.c \
-			$(SRC_DIR)/ft_utils_parsing_3.c
+			$(SRC_DIR)/ft_utils_flags_analysis.c \
+			$(SRC_DIR)/ft_utils_parsing_length_width.c \
+			$(SRC_DIR)/ft_utils_parse_stars.c
 OBJ =		$(patsubst $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, $(SRC))
 
 HEAD =		-I.

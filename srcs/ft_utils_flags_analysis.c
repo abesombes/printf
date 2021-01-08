@@ -1,39 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils_maths.c                                   :+:      :+:    :+:   */
+/*   ft_utils_parsing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/02 19:38:28 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/03 00:09:26 by abesombe         ###   ########.fr       */
+/*   Created: 2020/12/28 12:34:28 by abesombe          #+#    #+#             */
+/*   Updated: 2021/01/07 22:01:12 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-long long	ft_max(long long a, long long b)
+int	ft_is_conv_s(char c)
 {
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-long long	ft_ten_power(int nb)
-{
-	long long	res;
-	int			i;
+	char	*conv_s;
+	int		i;
 
 	i = 0;
-	res = 1;
-	while (i++ < nb)
-		res *= 10;
-	return (res);
+	conv_s = "cspdiuxXnfge%";
+	while (conv_s[i] && conv_s[i] != c)
+		i++;
+	if (i > 12)
+		return (0);
+	return (1);
 }
 
-double		ft_abs(double nb)
+int	ft_is_flag(char c)
 {
-	if (nb >= 0)
-		return (nb);
-	return (-nb);
+	char	*flags;
+	int		i;
+
+	i = 0;
+	flags = "*0+ -#lh";
+	while (flags[i] && flags[i] != c)
+		i++;
+	if (i > 7)
+		return (0);
+	return (1);
+}
+
+int	ft_is_charset(char *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

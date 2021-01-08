@@ -16,39 +16,39 @@ void	ft_put_nbr_hexa_lc(long long i, t_printf *f)
 {
 	if (i > 15)
 		ft_put_nbr_hexa_lc(i / 16, f);
-	ft_putchar_f("0123456789abcdef" [(int)(i % 16)], f);
+	ft_putchar_f("0123456789abcdef"[(int)(i % 16)], f);
 }
 
 void	ft_put_nbr_hexa_uc(long long i, t_printf *f)
 {
 	if (i > 15)
 		ft_put_nbr_hexa_uc(i / 16, f);
-	ft_putchar_f("0123456789ABCDEF" [(int)(i % 16)], f);
+	ft_putchar_f("0123456789ABCDEF"[(int)(i % 16)], f);
 }
 
-int	ft_count_hexsize(long long nb, t_printf *f)
+int		ft_count_hexsize(long long nb, t_printf *f)
 {
 	int			n_size;
 	long long	n;
 
 	n = nb;
 	n_size = ft_count_hex_digits(nb, f);
-	if (ft_is_charset("xX", f->conv_spec))
+	if (ft_is_charset("xX", f->conv_s))
 		f->plus = 0;
-	if (f->conv_spec == 'p' && f->alternate)
-		f->alternate = 0;
-	if (f->conv_spec == 'X')
+	if (f->conv_s == 'p' && f->alter)
+		f->alter = 0;
+	if (f->conv_s == 'X')
 		f->uc_x = 1;
-	if (ft_is_charset("xX", f->conv_spec) && f->alternate && nb > 0)
-		f->conv_spec = 'p';
-	if (f->precision >= n_size)
-		n_size = f->precision;
-	if (f->conv_spec == 'p')
+	if (ft_is_charset("xX", f->conv_s) && f->alter && nb > 0)
+		f->conv_s = 'p';
+	if (f->preci >= n_size)
+		n_size = f->preci;
+	if (f->conv_s == 'p')
 		n_size = n_size + 2;
 	return (n_size);
 }
 
-int	ft_count_hex_digits(long long n, t_printf *f)
+int		ft_count_hex_digits(long long n, t_printf *f)
 {
 	long long	nb;
 	int			n_digit;
@@ -60,7 +60,7 @@ int	ft_count_hex_digits(long long n, t_printf *f)
 		n_digit++;
 		nb = nb / 16;
 	}
-	if (n != 0 || f->precision != 0)
+	if (n != 0 || f->preci != 0)
 		n_digit++;
 	return (n_digit);
 }

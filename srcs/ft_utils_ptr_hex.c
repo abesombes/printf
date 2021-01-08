@@ -16,27 +16,26 @@ void	ft_put_ptr_nbr_hexa_lc(unsigned long long i, t_printf *f)
 {
 	if (i > 15)
 		ft_put_ptr_nbr_hexa_lc(i / 16, f);
-	ft_putchar_f("0123456789abcdef" [(int)(i % 16)], f);
+	ft_putchar_f("0123456789abcdef"[(int)(i % 16)], f);
 }
 
-int	ft_count_ptr_hexsize(unsigned long long nb, t_printf *f)
-
+int		ft_count_ptr_hexsize(unsigned long long nb, t_printf *f)
 {
-	int			n_size;
+	int					n_size;
 	unsigned long long	n;
 
 	n = nb;
 	n_size = ft_count_ptr_hex_digits(nb);
-	if (f->conv_spec == 'p' && f->alternate)
-		f->alternate = 0;
-	if (f->precision >= n_size)
-		n_size = f->precision;
-	if (f->conv_spec == 'p')
+	if (f->conv_s == 'p' && f->alter)
+		f->alter = 0;
+	if (f->preci >= n_size)
+		n_size = f->preci;
+	if (f->conv_s == 'p')
 		n_size = n_size + 2;
 	return (n_size);
 }
 
-int	ft_count_ptr_hex_digits(unsigned long long n)
+int		ft_count_ptr_hex_digits(unsigned long long n)
 {
 	int	n_digit;
 
