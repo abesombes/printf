@@ -29,9 +29,7 @@ void	ft_put_nbr_hexa_uc(long long i, t_printf *f)
 int		ft_count_hexsize(long long nb, t_printf *f)
 {
 	int			n_size;
-	long long	n;
 
-	n = nb;
 	n_size = ft_count_hex_digits(nb, f);
 	if (ft_is_charset("xX", f->conv_s))
 		f->plus = 0;

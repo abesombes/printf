@@ -36,10 +36,8 @@ int	ft_count_ptr_pad_lzeros(double nb, t_printf *f)
 int	ft_count_ptr_pad_lspaces(double nb, t_printf *f)
 {
 	int			pls;
-	long long	n;
 	int			n_digits;
 
-	n = nb;
 	pls = 0;
 	n_digits = ft_count_ptr_hex_digits(nb);
 	if (f->minus || (f->zero && f->preci < 0))
@@ -51,7 +49,6 @@ int	ft_count_ptr_pad_lspaces(double nb, t_printf *f)
 int	ft_count_ptr_pad_rspaces(double nb, t_printf *format)
 {
 	int			prs;
-	int			extra;
 	t_printf	f;
 	long long	n;
 	int			n_digits;
@@ -59,10 +56,9 @@ int	ft_count_ptr_pad_rspaces(double nb, t_printf *format)
 	f = *format;
 	n = nb;
 	prs = 0;
-	extra = 0;
 	if (ft_is_charset("p", f.conv_s))
 		n_digits = ft_count_hex_digits(nb, format);
 	if (f.minus)
-		return (ft_max(f.width - f.preci, f.width - n_digits) - extra);
+		return (ft_max(f.width - f.preci, f.width - n_digits));
 	return (0);
 }

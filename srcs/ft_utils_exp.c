@@ -63,10 +63,8 @@ int		ft_count_dec_size(long long *dec_part)
 
 int		ft_count_expsize(double n, t_printf *f)
 {
-	double	nb;
 	int		f_size;
 
-	nb = ft_abs(n);
 	f_size = 0;
 	if (n < 0 || f->space || f->plus)
 		f_size = 1;
