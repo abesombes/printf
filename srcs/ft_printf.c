@@ -106,8 +106,7 @@ int		ft_printf(const char *str, ...)
 
 	va_start(va, str);
 	i = 0;
-	format = (t_printf *)malloc(sizeof(t_printf));
-	if (!format)
+	if (!(format = (t_printf *)malloc(sizeof(t_printf))))
 		return (-1);
 	format->displayed = 0;
 	while (str[i] && str[i + 1] && i < ft_strlen(str))

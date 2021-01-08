@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils_parsing.c                                 :+:      :+:    :+:   */
+/*   ft_utils_flags_analysis.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 12:34:28 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/07 22:01:12 by abesombe         ###   ########.fr       */
+/*   Created: 2021/01/08 17:50:32 by abesombe          #+#    #+#             */
+/*   Updated: 2021/01/08 17:50:37 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,13 @@ int	ft_is_charset(char *s, char c)
 			return (1);
 		i++;
 	}
+	return (0);
+}
+
+int	ft_is_a_flag_not_conv_s(const char *str, int i, int *j)
+{
+	if (str[i + *j] && ft_is_flag(str[i + *j]) && \
+		!ft_is_charset("cspdiuxXnfge%", str[i + *j]))
+		return (1);
 	return (0);
 }

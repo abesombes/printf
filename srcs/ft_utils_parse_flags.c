@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reset_format.c                                  :+:      :+:    :+:   */
+/*   ft_utils_parse_flags.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 12:34:28 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/08 19:25:52 by abesombe         ###   ########.fr       */
+/*   Created: 2021/01/08 19:12:53 by abesombe          #+#    #+#             */
+/*   Updated: 2021/01/08 19:12:57 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	ft_reset_format(t_printf *format)
+void	ft_parse_flags(char flag, t_printf *f)
 {
-	format->conv_s = 0;
-	format->length = 0;
-	format->width = -1;
-	format->preci = -1;
-	format->minus = 0;
-	format->plus = 0;
-	format->star = 0;
-	format->sign_display = 0;
-	format->space = 0;
-	format->alter = 0;
-	format->zero = 0;
-	format->uc_x = 0;
+	if (flag == '-')
+		f->minus = 1;
+	else if (flag == '+')
+		f->plus = 1;
+	else if (flag == '0')
+		f->zero = 1;
+	else if (flag == ' ')
+		f->space = 1;
+	else if (flag == '#')
+		f->alter = 1;
+	else if (flag == '*')
+		f->star++;
 }

@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_reset_format.c                                  :+:      :+:    :+:   */
+/*   ft_extract_precision.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 12:34:28 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/08 19:25:52 by abesombe         ###   ########.fr       */
+/*   Created: 2021/01/08 19:07:23 by abesombe          #+#    #+#             */
+/*   Updated: 2021/01/08 19:22:43 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-void	ft_reset_format(t_printf *format)
+void	ft_extract_precision(const char *str, int i, int *j, t_printf *format)
 {
-	format->conv_s = 0;
-	format->length = 0;
-	format->width = -1;
-	format->preci = -1;
-	format->minus = 0;
-	format->plus = 0;
-	format->star = 0;
-	format->sign_display = 0;
-	format->space = 0;
-	format->alter = 0;
-	format->zero = 0;
-	format->uc_x = 0;
+	format->preci = 0;
+	while (str[i + *j] && str[i + *j] >= '0' && str[i + *j] <= '9')
+		format->preci = format->preci * 10 + str[i + (*j)++] - 48;
 }

@@ -18,14 +18,14 @@
 # include <stdlib.h>
 
 typedef int		t_bool;
-typedef struct s_printf
+typedef	struct	s_printf
 {
 	char	conv_s;
 	char	length;
 	int		displayed;
 	int		width;
 	int		preci;
-	t_bool		star;
+	t_bool	star;
 	t_bool	minus;
 	t_bool	plus;
 	t_bool	space;

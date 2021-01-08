@@ -13,7 +13,9 @@
 NAME =		libftprintf.a
 
 SRC_DIR =	srcs
-SRC =		$(SRC_DIR)/ft_printf.c \
+SRC =		$(SRC_DIR)/ft_extract_width.c \
+			$(SRC_DIR)/ft_extract_precision.c \
+			$(SRC_DIR)/ft_printf.c \
 			$(SRC_DIR)/ft_putc.c \
 			$(SRC_DIR)/ft_put_nbr.c \
 			$(SRC_DIR)/ft_putnbr_f.c \
@@ -27,16 +29,17 @@ SRC =		$(SRC_DIR)/ft_printf.c \
 			$(SRC_DIR)/ft_putstrn.c \
 			$(SRC_DIR)/ft_reset_format.c \
 			$(SRC_DIR)/ft_strlen.c \
-			$(SRC_DIR)/ft_utils.c \
 			$(SRC_DIR)/ft_utils_exp.c \
+			$(SRC_DIR)/ft_utils_flags_analysis.c \
 			$(SRC_DIR)/ft_utils_float.c \
 			$(SRC_DIR)/ft_utils_ptr_hex.c \
 			$(SRC_DIR)/ft_utils_hex.c \
 			$(SRC_DIR)/ft_utils_maths.c \
+			$(SRC_DIR)/ft_utils_paddings.c \
 			$(SRC_DIR)/ft_utils_ptr.c \
 			$(SRC_DIR)/ft_utils_str.c \
-			$(SRC_DIR)/ft_utils_flags_analysis.c \
 			$(SRC_DIR)/ft_utils_parsing_length_width.c \
+			$(SRC_DIR)/ft_utils_parse_flags.c \
 			$(SRC_DIR)/ft_utils_parse_stars.c
 OBJ =		$(patsubst $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, $(SRC))
 
