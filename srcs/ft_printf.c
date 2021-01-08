@@ -28,8 +28,8 @@ void	ft_launch_fegps(char conv_spec, t_printf *format, va_list *va)
 	else if (conv_spec == 'p')
 	{
 		p = va_arg(*va, void *);
-		ft_putptr_hex((unsigned long long)p, format, ft_count_ptr_hexsize((unsigned long long)p, \
-format));
+		ft_putptr_hex((unsigned long long)p, format, \
+				ft_count_ptr_hexsize((unsigned long long)p, format));
 	}
 	else if (conv_spec == 's')
 	{
@@ -51,24 +51,24 @@ void	ft_launch_udix(char conv_spec, t_printf *format, va_list *va)
 			format->width = va_arg(*va, int);
 		k = va_arg(*va, long long);
 		if (ft_is_charset("xX", conv_spec))
-			ft_putnbr_hex((unsigned int)k, format, ft_count_hexsize((unsigned int)k, format));
+			ft_putnbr_hex((unsigned int)k, format, \
+					ft_count_hexsize((unsigned int)k, format));
 		else
 		{
 			if (conv_spec == 'u' && format->plus)
 				format->plus = 0;
 			if (conv_spec == 'u' && format->space)
 				format->space = 0;
-			if	(conv_spec == 'u' && ft_is_charset("lL", format->length))
-				ft_put_nbr((unsigned long long)k, format, ft_count_charsize((unsigned long long)k, format));
-			else if	(conv_spec == 'u')
-				ft_put_nbr((unsigned int)k, format, ft_count_charsize((unsigned int)k, format));
-			else	
+			if (conv_spec == 'u')
+				ft_put_nbr((unsigned int)k, format, \
+						ft_count_charsize((unsigned int)k, format));
+			else
 				ft_put_nbr((int)k, format, ft_count_charsize((int)k, format));
 		}
 	}
 }
 
-int	ft_finish_parsing(const char *str, int i, va_list *va, t_printf *format)
+int		ft_finish_parsing(const char *str, int i, va_list *va, t_printf *format)
 {
 	int	total_nb_displayed_chars;
 
@@ -83,8 +83,7 @@ int	ft_finish_parsing(const char *str, int i, va_list *va, t_printf *format)
 void	ft_launch_c(char conv_spec, t_printf *format, va_list *va)
 {
 	unsigned char	c;
-	
-	//printf("f->alternate: [%i] - f->zero: [%i] - f->conv_spec: [%c] - width: [%i] - precision: [%i]", format->alternate, format->zero, format->conv_spec, format->width, format->precision);
+
 	if (format->conv_spec == '%' || format->conv_spec == 0)
 		ft_putc(conv_spec, format);
 	if (conv_spec && ft_is_conv_spec(conv_spec) == 1)
@@ -98,7 +97,7 @@ void	ft_launch_c(char conv_spec, t_printf *format, va_list *va)
 	}
 }
 
-int	ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
 	va_list		va;
 	int			i;
