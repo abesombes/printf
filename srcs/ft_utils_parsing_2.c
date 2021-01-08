@@ -84,7 +84,5 @@ int	ft_parse_format(const char *str, t_printf *format, int i, int *j)
 		format->conv_spec = str[i + *j];
 		ft_parse_length(str[i + *j - 2], str[i + *j - 1], format);
 	}
-	//while (str[i + *j] && ft_is_conv_spec(str[i + *j]) != 1)
-	//		(*j)++;
 	return (ft_return_minus_one_if_error(str[i + *j]));
 }

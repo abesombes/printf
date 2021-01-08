@@ -48,7 +48,6 @@ void	ft_putptr_hex(unsigned long long n, t_printf *f, int n_size)
 
 	pls = ft_count_ptr_pad_lspaces(n, f);
 	plz = ft_count_ptr_pad_lzeros(n, f);	
-//	printf("pls: %i - plz: %i", pls, plz);
 	if (!f->minus && f->width > n_size && pls > 0)
 		ft_print_char(pls, ' ', f);
 	else if (!f->minus && f->width > n_size && plz > 0 && !(f->zero && f->alternate))

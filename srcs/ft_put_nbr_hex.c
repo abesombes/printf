@@ -33,7 +33,6 @@ void	ft_print_hexnbr_block(long long n, t_printf *f, int n_size)
 	int	n_digits;
 
 	n_digits = ft_count_hex_digits(n, f);
-//	printf(" conv_spec: %c - precision: %i - n_digits: %i", f->conv_spec, f->precision, n_digits);
 	if (f->precision > n_digits)
 	{
 		if ((f->alternate && n > 0) || f->conv_spec == 'p')
@@ -50,7 +49,6 @@ f->precision >= 0 || f->alternate))
 		ft_putstr_f("0X", f);
 	else if (f->conv_spec == 'p')
 		ft_putstr_f("0x", f);
-//	printf("pls: %i - plz: %i - n_size: %i", ft_count_pad_lspaces(n, f), ft_count_pad_lzeros(n, f), n_size); 
 	if (f->conv_spec == 'p' && f->precision <= n_digits && \
 !ft_count_pad_rspaces(n, f) && f->width > ft_max(ft_count_pad_lspaces(n, f), \
 ft_count_pad_lzeros(n, f)) + n_size)
@@ -66,13 +64,10 @@ void	ft_putnbr_hex(long long n, t_printf *f, int n_size)
 
 	pls = ft_count_pad_lspaces(n, f);
 	plz = ft_count_pad_lzeros(n, f);	
-//	printf("n_size: %i - pls: %i - plz: %i", n_size, pls, plz);
 	if (!f->minus && f->width > n_size && pls > 0)
 		ft_print_char(pls, ' ', f);
 	else if (!f->minus && f->width > n_size && plz > 0 && !(f->zero && f->alternate))
 		ft_print_char(plz, '0', f);
-//	if (f->precision < 0 && f->zero && f->alternate && f->width > n_size)
-//		f->precision = f->width - 2;
 	ft_print_hexnbr_block(n, f, n_size);
 	if (f->width > n_size && f->minus)
 		ft_print_pad_right(f, n_size);

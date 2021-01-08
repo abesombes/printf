@@ -28,7 +28,6 @@ void	ft_print_nbr_block(long long n, t_printf *f, int n_size)
 	}
 	n_digits = ft_count_digits(n, f);
 	nb = ft_abs(n);
-//	printf(" - n_digits: %i", n_digits);
 	if (f->precision > n_digits || (f->width > n_digits && !f->minus))
 		ft_print_char(f->precision - n_digits, '0', f);
 	else if (f->plus && f->zero && !f->minus && f->width > n_size)
@@ -77,8 +76,6 @@ void	ft_put_nbr(long long n, t_printf *format, int n_size)
 	pls = ft_count_pad_lspaces(n, format);
 	plz = ft_count_pad_lzeros(n, format);
 	f = *format;
-//	printf("\nconv_s: %c - minus = %i - pls = %i - plz = %i - width = %i - nsize = %i - prec = %i", f.conv_spec, f.minus, pls, plz, f.width, n_size, f.precision);
-
 		if (f.plus && plz > 0 && n >= 0)
 			ft_putchar_f('+', format);
 		else if (f.space && !f.plus && n >= 0)

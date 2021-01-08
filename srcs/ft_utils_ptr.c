@@ -42,7 +42,6 @@ int	ft_count_ptr_pad_lspaces(double nb, t_printf *f)
 	n = nb;
 	pls = 0;
 	n_digits = ft_count_ptr_hex_digits(nb);
-//	printf("n_digits: %i", n_digits);
 	if (f->minus || (f->zero && f->precision < 0))
 		return (0);
 	pls = ft_max(f->precision, n_digits) + 2;

@@ -45,9 +45,7 @@ int	ft_count_ptr_hex_digits(unsigned long long n)
 	{
 		n_digit++;
 		n = n / 16;
-	//	printf("\nn = %llu\n", n);
 	}
 	n_digit++;
-//	printf("n_digit: %i", n_digit);
 	return (n_digit);
 }

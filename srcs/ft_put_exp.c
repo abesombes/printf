@@ -12,7 +12,7 @@
 
 #include "../ft_printf.h"
 
-void	ft_put_exp_before_after(double n, t_printf *f, int n_size)
+void		ft_put_exp_before_after(double n, t_printf *f, int n_size)
 {
 	int	pls;
 	int	plz;
@@ -29,7 +29,7 @@ f->alternate))
 		ft_print_pad_right(f, n_size);
 }
 
-void	ft_print_exp(int exp, t_printf *f)
+void		ft_print_exp(int exp, t_printf *f)
 {
 	ft_putchar_f('e', f);
 	if (exp >= 0)
@@ -55,7 +55,7 @@ long long	ft_exp_rounding(long long dec_part)
 	return (dec_part / 10);
 }
 
-void	ft_zeros_after_dot_exp(double n, long long dec_part, t_printf *f)
+void		ft_zeros_after_dot_exp(double n, long long dec_part, t_printf *f)
 {
 	int		def_pr;
 	int		i;
@@ -84,7 +84,7 @@ i <= def_pr - dec_size)
 	}
 }
 
-void	ft_putexp(double n, t_printf *f)
+void		ft_putexp(double n, t_printf *f)
 {
 	double		nb;
 	int			def_pr;
