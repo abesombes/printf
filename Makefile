@@ -56,6 +56,10 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $@
 
+bonus: $(OBJ)
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
+
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(HEAD) -c $< -o $@
 
