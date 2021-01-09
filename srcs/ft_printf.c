@@ -80,7 +80,7 @@ int		ft_finish_parsing(const char *str, int i, va_list *va, t_printf *format)
 	return (total_nb_displayed_chars);
 }
 
-void	ft_launch_c(char conv_s, t_printf *format, va_list *va)
+void	ft_launch_cn(char conv_s, t_printf *format, va_list *va)
 {
 	unsigned char	c;
 
@@ -93,6 +93,8 @@ void	ft_launch_c(char conv_s, t_printf *format, va_list *va)
 			c = va_arg(*va, int);
 			ft_putc(c, format);
 		}
+		else if (conv_s == 'n')
+			ft_putnbr_f(format->displayed, format);
 		ft_launch_fegps(conv_s, format, va);
 	}
 }
@@ -117,7 +119,7 @@ int		ft_printf(const char *str, ...)
 		{
 			ft_parse_format(str, format, i, &j);
 			ft_parse_stars(str + i, format, &va);
-			ft_launch_c(str[i + j], format, &va);
+			ft_launch_cn(str[i + j], format, &va);
 		}
 		else if (str[i] && str[i + 1] && str[i] == '%' && str[i + 1] == '%')
 			ft_putchar_f('%', format);
