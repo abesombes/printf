@@ -83,6 +83,7 @@ int		ft_finish_parsing(const char *str, int i, va_list *va, t_printf *format)
 void	ft_launch_cn(char conv_s, t_printf *format, va_list *va)
 {
 	unsigned char	c;
+	int				*ptr;
 
 	if (format->conv_s == '%' || format->conv_s == 0)
 		ft_putc(conv_s, format);
@@ -94,7 +95,10 @@ void	ft_launch_cn(char conv_s, t_printf *format, va_list *va)
 			ft_putc(c, format);
 		}
 		else if (conv_s == 'n')
-			ft_putnbr_f(format->displayed, format);
+		{
+			ptr = va_arg(*va, int*); 
+			*ptr = format->displayed;
+		}
 		ft_launch_fegps(conv_s, format, va);
 	}
 }
