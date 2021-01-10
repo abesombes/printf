@@ -6,14 +6,13 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 14:37:42 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/06 22:22:04 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/09 14:50:12 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ELEM_H
 # define ELEM_H
 # include <stdarg.h>
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 

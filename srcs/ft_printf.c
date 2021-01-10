@@ -96,7 +96,7 @@ void	ft_launch_cn(char conv_s, t_printf *format, va_list *va)
 		}
 		else if (conv_s == 'n')
 		{
-			ptr = va_arg(*va, int*); 
+			ptr = va_arg(*va, int*);
 			*ptr = format->displayed;
 		}
 		ft_launch_fegps(conv_s, format, va);

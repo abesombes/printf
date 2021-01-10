@@ -6,7 +6,7 @@
 /*   By: abesombe <abesombe@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 17:38:00 by abesombe          #+#    #+#             */
-/*   Updated: 2021/01/05 19:05:02 by abesombe         ###   ########.fr       */
+/*   Updated: 2021/01/09 14:23:25 by abesombe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <stdio.h>
 # include <unistd.h>
 # include "elem.h"
 
@@ -37,7 +36,8 @@ int			ft_count_pad_lspaces(double nb, t_printf *format);
 int			ft_count_pad_rspaces(double nb, t_printf *format);
 int			ft_count_expsize(double n, t_printf *f);
 long long	ft_exp_rounding(long long dec_part);
-void		ft_extract_precision(const char *str, int i, int *j, t_printf *format);
+void		ft_extract_precision(const char *str, int i, int *j, t_printf \
+			*format);
 void		ft_extract_width(const char *str, int i, int *j, t_printf *format);
 long long	ft_float_rounding(long long dec_part, long long int_part, \
 			int def_pr, double n);
@@ -48,8 +48,10 @@ int			ft_is_conv_s(char c);
 void		ft_launch_udix(char conv_spec, t_printf *format, va_list *va);
 long long	ft_max(long long a, long long b);
 void		ft_parse_flags(char flag, t_printf *f);
-void		ft_parse_one_star(const char *str, t_printf *format, va_list *va, int *i);
-void		ft_parse_two_stars(const char *str, t_printf *format, va_list *va, int *i);
+void		ft_parse_one_star(const char *str, t_printf *format, va_list *va, \
+			int *i);
+void		ft_parse_two_stars(const char *str, t_printf *format, va_list *va, \
+			int *i);
 void		ft_parse_stars(const char *str, t_printf *format, va_list *va);
 int			ft_parse_format(const char *str, t_printf *format, int i, int *j);
 void		ft_prefix(double n, t_printf *f);

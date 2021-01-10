@@ -71,4 +71,5 @@ fclean: clean
 
 re: fclean all
 
-.PONY: all, clean, fclean, re
+.PONY: all, clean, fclean, bonus, re
+

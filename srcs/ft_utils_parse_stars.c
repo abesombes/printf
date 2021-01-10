@@ -25,7 +25,8 @@ void	ft_parse_stars(const char *str, t_printf *format, va_list *va)
 		ft_parse_one_star(str, format, va, &i);
 }
 
-void	ft_parse_one_star(const char *str, t_printf *format, va_list *va, int *i)
+void	ft_parse_one_star(const char *str, t_printf *format, va_list *va, \
+		int *i)
 {
 	if (str[*i] && str[*i] == '*')
 	{
@@ -43,7 +44,8 @@ void	ft_parse_one_star(const char *str, t_printf *format, va_list *va, int *i)
 	}
 }
 
-void	ft_parse_two_stars(const char *str, t_printf *format, va_list *va, int *i)
+void	ft_parse_two_stars(const char *str, t_printf *format, va_list *va, \
+		int *i)
 {
 	format->width = va_arg(*va, int);
 	if (format->width < 0)
